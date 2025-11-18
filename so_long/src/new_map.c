@@ -9,7 +9,7 @@
 /*   Updated: 2025/11/18 12:53:36 by pucci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include "so_long.h"
 
 static int	checklength(const char *filename)	//check la longeur de la ligne comme base de referance
 {
@@ -26,7 +26,6 @@ static int	checklength(const char *filename)	//check la longeur de la ligne comm
 	close(fd);
 	return (i);
 }
-
 
 static int	checkcolumn(const char *filename)	//check le nombre de colonne(la hauteur)
 {

@@ -23,7 +23,7 @@
 # endif
 
 char	*get_next_line(int fd);
-int		ft_strlen(const char *s);
+static int		ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_checkstr(char *s);
 char	*ft_strndup(const char *s1, int size);
