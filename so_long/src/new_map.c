@@ -27,7 +27,7 @@ static int	check_length(const char *filename)	//check la longeur de la ligne com
 	while(ref_line[i])
 		i++;
 	close(fd);
-	return (i);
+	return (free(ref_line), i);
 }
 
 static int	check_column(const char *filename)	//check le nombre de colonne(la hauteur)
@@ -49,7 +49,6 @@ static int	check_column(const char *filename)	//check le nombre de colonne(la ha
 		count++;
 	}
 	close(fd);
-	printf("count = %d\n", count);
 	return (count);
 }
 
@@ -60,20 +59,24 @@ static char	**malloc_map(const char *filename, int x, char **map)	//check la lon
 	int y;
 	int fd;
 	char *ref_line;
-	
+
 	i = 0;
 	y = 0;
 	fd = open(filename, O_RDONLY);
 	if(fd == -1 || !map)
 		return (NULL);
-	while(map[y])
+	while(y < x)
 	{
-		ref_line = get_next_line(fd);
+		ref_line = get_next_line(fd);//est ce que je devrai mettre un check si je check plus haud dans
+		if(ref_line == NULL)
+			break ;
+		i = 0;
 		while(ref_line[i])
 			i++;
 		if(i != x)
 			return (close(fd), free_map(map , y), NULL);
 		map[y] = ft_strdup(ref_line);//check pour ce + 1 si useless ou pas
+		free(ref_line);
 		if(!map[y])
 			return (close(fd), free_map(map, y), NULL);
 		y++;
@@ -81,6 +84,8 @@ static char	**malloc_map(const char *filename, int x, char **map)	//check la lon
 	close(fd);
 	return (map);
 }
+
+int set_coords()
 
 static int	new_map(t_game *game)	//-1 si error 1 si true
 {
@@ -100,18 +105,19 @@ static int	new_map(t_game *game)	//-1 si error 1 si true
 		return (-1);
 	game->map->map = malloc(sizeof(char *) * (y + 1));
 	if(!game->map->map)//échec alloc hauteur
-		return (-1);
-	if(malloc_map(game->filename, x, game->map->map) == 0)//échec de la largeur
-		return (-1);
+		return (free(game->map), -1);
+	if(malloc_map(game->filename, x, game->map->map) == NULL)//échec de la largeur
+		return (free(game->map), -1);
+	return (1);
 }
 
 int main (void)
 {
 	t_game *game;
 
-
 	game = malloc(sizeof(t_game));
 	game->filename = "level1.ber";
 	printf("%d",new_map(game));
+	printf("%c",game->map->map[1][1]);
 	free(game);
 }

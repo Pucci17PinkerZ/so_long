@@ -11,34 +11,35 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int checkcolumn(const char *filename);
-int check_line(char *line, int countline, int column, int length);
-int checklength(const char *filename);
-
-int	read_map(const char *filename, t_game *game) // file dans struct
+int check_walls(t_game *game)
 {
-	int fd;
-	int countline;
-	int column;//hauteur
-	int length;//longeur
-	char *line;
+	int y;
 
-	column = checkcolumn(filename);
-	length = checklength(filename);
-	countline = 0;
-	fd = open(filename);	//check aussi si le fichier à bien été ouvert?
-
-	while (1)//boucle infine
+	y = 0;
+	while(game->map->map[y])
 	{
-		line = get_next_line(fd);
-		if (line == NULL)
-		countline++;
-		if(check_line(line, countline, column, length) == 1)//comment gerer la sortie d'erreur? faire en sorte de voir ce qu'il check
-			break ;
+		while(game->map->map[y][x])
+		{
+			if(game->map->map[0][x] != 1 
+				|| game->map->map[game->map->column][x] != 1)
+				return (-1);
+			x++;
+		}
+		if(game->map->map[y][0] != 1 
+			|| game->map->map[y][game->map->length] != 1)
+			return (-1);
+		y++;
 	}
+
 }
 
+int check_map(t_game *game) // fonction principale qui rassemble tout les checks
+{
+	
+	if(check_walls(game) == -1)//on check si les murs sont good
+		return (-1);// on free?
+	
+}
 
 
 int check_line(char *line, int countline, int column, int length)	//fait les check suivants : les murs, la taille X * Y, les collectibles
@@ -66,22 +67,6 @@ int check_line(char *line, int countline, int column, int length)	//fait les che
 	return (0);
 }
 
-int checklength(const char *filename)	//check la longeur de la ligne comme base de referance
-{
-	int i;
-	int fd;
-	char *ref_line;
-
-	i = 0;
-	fd = open(filename, O_RDONLY);
-	if(!open)
-		return(0);
-	ref_line = get_next_line(fd);
-	while(ref_line[i])
-		i++;
-	close(fd);
-	return (i);
-}
 
 
 int main (void)

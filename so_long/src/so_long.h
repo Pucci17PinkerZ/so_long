@@ -12,6 +12,8 @@
 typedef struct s_map
 {
 	char **map;
+	int length;
+	int column;
 } t_map;
 
 
