@@ -36,17 +36,20 @@ static int	check_column(const char *filename)	//check le nombre de colonne(la ha
 	int		count;
 	char	*check;
 
+	count = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (-1);
 	while(1)
 	{
 		check = get_next_line(fd);
-		if(check = NULL);
+		if(check == NULL)
 			break ;
+		free(check);
 		count++;
 	}
 	close(fd);
+	printf("count = %d\n", count);
 	return (count);
 }
 
@@ -59,10 +62,11 @@ static char	**malloc_map(const char *filename, int x, char **map)	//check la lon
 	char *ref_line;
 	
 	i = 0;
+	y = 0;
 	fd = open(filename, O_RDONLY);
-	if(fd == -1)
+	if(fd == -1 || !map)
 		return (NULL);
-	while(ref_line != 0)
+	while(map[y])
 	{
 		ref_line = get_next_line(fd);
 		while(ref_line[i])
@@ -91,6 +95,9 @@ static int	new_map(t_game *game)	//-1 si error 1 si true
 	y = check_column(game->filename);
 	if(y == -1)
 		return (-1);
+	game->map = malloc(sizeof(t_map));
+	if(!game->map)
+		return (-1);
 	game->map->map = malloc(sizeof(char *) * (y + 1));
 	if(!game->map->map)//échec alloc hauteur
 		return (-1);
@@ -101,9 +108,10 @@ static int	new_map(t_game *game)	//-1 si error 1 si true
 int main (void)
 {
 	t_game *game;
-	
-	game = malloc(sizeof(t_game));
 
+
+	game = malloc(sizeof(t_game));
 	game->filename = "level1.ber";
 	printf("%d",new_map(game));
+	free(game);
 }
