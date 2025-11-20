@@ -16,7 +16,6 @@ typedef struct s_map
 	int column;
 } t_map;
 
-
 typedef struct s_game
 {
 	const char *filename;

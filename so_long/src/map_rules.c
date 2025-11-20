@@ -11,26 +11,52 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-int check_walls(t_game *game)
+int scan_item(char c)
+{
+	if(c == '')
+}
+
+int	scan_map(char c, int x,int y, t_game *game)
+{
+	if(y == 0 || y == game->map->column)
+	{
+		if(c != '1')
+		return (-1);
+	}
+	else if(x == 0 || x == game->map->length)
+	{
+		if(c != '1')
+			return (-1);
+	}
+	else
+	{
+		
+	}
+		scan_item();
+}
+
+int check_map(t_game *game)//check des chars c'est plus esazzy
 {
 	int y;
+
 
 	y = 0;
 	while(game->map->map[y])
 	{
 		while(game->map->map[y][x])
 		{
-			if(game->map->map[0][x] != 1 
-				|| game->map->map[game->map->column][x] != 1)
+			// if(game->map->map[0][x] != '1' 
+			// 	|| game->map->map[game->map->column][x] != '1')
+			if(scan_map())
 				return (-1);
 			x++;
 		}
-		if(game->map->map[y][0] != 1 
-			|| game->map->map[y][game->map->length] != 1)
-			return (-1);
+		// if(game->map->map[y][0] != 1 
+		// 	|| game->map->map[y][game->map->length] != 1)
+		// 	return (-1);
 		y++;
 	}
-
+	return (1);
 }
 
 int check_map(t_game *game) // fonction principale qui rassemble tout les checks
@@ -38,7 +64,7 @@ int check_map(t_game *game) // fonction principale qui rassemble tout les checks
 	
 	if(check_walls(game) == -1)//on check si les murs sont good
 		return (-1);// on free?
-	
+
 }
 
 
