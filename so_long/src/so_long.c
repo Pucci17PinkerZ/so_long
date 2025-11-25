@@ -35,14 +35,14 @@ int main (int argc, char **argv)
 			printf("%c",game->map->map[y][x]);
 		}
 			// printf("%c",game->map->map[y][x + 1]);
-		printf("\n");
+		// printf("\n");
 	}
 	if(check_map(game))
 	{
 		printf("la map ne remplit pas les conditions :'(");
 		return (0);
 	}
-	printf("la map remplit les conditions :)\n");
+	printf("\nla map remplit les conditions :)\n");
 		
 	free(game->map);
 	free(game);

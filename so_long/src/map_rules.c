@@ -28,7 +28,7 @@ int	scan_item(char c, t_game *game)
 
 int	scan_map(char c, int x,int y, t_game *game)
 {
-	if(y == 0 || y == game->map->column)
+	if(y == 0 || y == game->map->column - 1)
 	{
 		// printf("\nla valeur de x == %d\n", x);
 		// printf("la valeur de y == %d\n", y);
@@ -39,7 +39,7 @@ int	scan_map(char c, int x,int y, t_game *game)
 		if(c != '1')
 			return (printf("JE PASSE PAR --LA CONDITION DU TOP ET DOWN\n"),-1);
 	}
-	else if(x == 0 || x == game->map->length)
+	else if(x == 0 || x == game->map->length - 1)
 	{
 		if(c != '1')
 			return (printf("JE PASSE PAR --LA CONDITION DES COLONNES\n"),-1);

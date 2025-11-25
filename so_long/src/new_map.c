@@ -28,10 +28,10 @@ int	check_length(const char *filename)	//check la longeur de la ligne comme base
 		i++;
 	// printf("\naprès le comptage x vaut == %d en longeur de tableau\n", i);
 	close(fd);
-	return (free(ref_line), i - 1);
+	return (free(ref_line), i);
 }
 
-int	check_column(const char *filename)	//check le nombre de colonne(la hauteur)
+int	check_column(const char *filename)
 {
 	int		fd;
 	int		count;
@@ -45,13 +45,14 @@ int	check_column(const char *filename)	//check le nombre de colonne(la hauteur)
 	{
 		check = get_next_line(fd);
 		if(check == NULL)
-			break ;
-		free(check);
+			break;
+		if (check[0] == '\n') 
+			return (free(check),-1);
 		count++;
+		free(check);
 	}
 	close(fd);
-	// printf("\nle nombre de colonne est de 5 le programme encompte == %d en valeur de tableau\n", count);
-	return (count - 1);
+	return (count);
 }
 
 char	**malloc_map(const char *filename, int x, int column, char **map)	//check la longeur de la ligne comme base de referance
@@ -67,34 +68,20 @@ char	**malloc_map(const char *filename, int x, int column, char **map)	//check l
 	if(fd == -1 || !map)
 		return (NULL);
 			printf("column == %d\n",column);
-	while(y <= column)
+	while(y < column)
 	{
 		printf("y == %d\n",y);
 		ref_line = get_next_line(fd);
+		if(column - 1 == y && ref_line[x] == '\n')
+			return (NULL);
 		if(ref_line == NULL)
 			break ;
-		if (ref_line[0] == '\n')
-		{
-			printf("\nje passe par ref_line[0] == '\n'\n");
-			free(ref_line);
-			break;
-		}
 		i = 0;
-		if(y == column)
-		{
-			while(i < column)
-						i++;
-			printf("\ni == %d\n x == %d\n",i,x);
-			if(i != x)
-				return (close(fd), free_map(map , y), NULL);
-		}
-		else
-		{
-			while(ref_line[i] != '\n')
-				i++;
-			if((i - 1) != x)
-				return (close(fd), free_map(map , y), NULL);
-		}
+		while(ref_line[i] != '\n' && ref_line[i] != '\0')
+			i++;
+		if(i != x)
+			return (close(fd), free_map(map , y), NULL);
+
 		map[y] = ft_substr(ref_line, 0, x + 1);
 		free(ref_line);
 		if(!map[y])
@@ -115,21 +102,21 @@ int	new_map(t_game *game)	//-1 si error 1 si true
 	x = check_length(game->filename);
 	if(x == -1)
 		return (-1);
-	y = check_column(game->filename);
+	y = check_column(game->filename);//prends le last \n
 	if(y == -1)
 		return (-1);
-	game->map = malloc(sizeof(t_map));//t_map alloué
+	game->map = malloc(sizeof(t_map));
 	if(!game->map)
 		return (-1);
 	game->map->column = y;
 	game->map->length = x;
-	// printf("en theorie x vaut 4 ---> le programme la compte comme %d\n", x);
-	printf("\nen theorie y vaut 5 et devrai valoir 4 ---> le programme la compte comme %d\n\n", y);
+	printf("en theorie x vaut 7 ---> le programme la compte comme %d\n", x);
+	printf("\nnbr de ligne réel 5\nnbr de ligne avec \\n 4\nvaleur de y == %d\n", y);
 	game->map->map = malloc(sizeof(char *) * (y + 1));
-	// printf("on malloc la dimention y avec %d + 1", y);
+	printf("on malloc la dimention y avec %d + 1\n", y);
 	if(!game->map->map)//échec alloc hauteur
 		return (free(game->map), -1);
-	if(malloc_map(game->filename, x, y, game->map->map) == NULL)//
+	if(malloc_map(game->filename, x, y, game->map->map) == NULL)
 		return (free(game->map), -1);
 	return (0);
 }
