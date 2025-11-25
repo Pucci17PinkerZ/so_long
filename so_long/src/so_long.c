@@ -42,7 +42,7 @@ int main (int argc, char **argv)
 		printf("la map ne remplit pas les conditions :'(");
 		return (0);
 	}
-	printf("la map remplit les conditions :)");
+	printf("la map remplit les conditions :)\n");
 		
 	free(game->map);
 	free(game);

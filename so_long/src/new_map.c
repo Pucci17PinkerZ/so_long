@@ -50,7 +50,7 @@ int	check_column(const char *filename)	//check le nombre de colonne(la hauteur)
 		count++;
 	}
 	close(fd);
-	// printf("le nombre de colonne est de 4 le programme encompte == %d en valeur de tableau\n", count);
+	// printf("\nle nombre de colonne est de 5 le programme encompte == %d en valeur de tableau\n", count);
 	return (count - 1);
 }
 
@@ -66,19 +66,38 @@ char	**malloc_map(const char *filename, int x, int column, char **map)	//check l
 	fd = open(filename, O_RDONLY);
 	if(fd == -1 || !map)
 		return (NULL);
-	while(y < column)
+			printf("column == %d\n",column);
+	while(y <= column)
 	{
-		ref_line = get_next_line(fd);//est ce que je devrai mettre un check si je check plus haud dans
+		printf("y == %d\n",y);
+		ref_line = get_next_line(fd);
 		if(ref_line == NULL)
 			break ;
+		if (ref_line[0] == '\n')
+		{
+			printf("\nje passe par ref_line[0] == '\n'\n");
+			free(ref_line);
+			break;
+		}
 		i = 0;
-		while(ref_line[i] != '\n')
-			i++;
-		if((i - 1) != x)
-			return (close(fd), free_map(map , y), NULL);
-		map[y] = ft_substr(ref_line, 0, x + 1);//il faut check sa si c'est good
+		if(y == column)
+		{
+			while(i < column)
+						i++;
+			printf("\ni == %d\n x == %d\n",i,x);
+			if(i != x)
+				return (close(fd), free_map(map , y), NULL);
+		}
+		else
+		{
+			while(ref_line[i] != '\n')
+				i++;
+			if((i - 1) != x)
+				return (close(fd), free_map(map , y), NULL);
+		}
+		map[y] = ft_substr(ref_line, 0, x + 1);
 		free(ref_line);
-		if(!map[y])//on check que l'alloc a bien reusit
+		if(!map[y])
 			return (close(fd), free_map(map, y), NULL);
 		y++;
 	}
@@ -104,13 +123,13 @@ int	new_map(t_game *game)	//-1 si error 1 si true
 		return (-1);
 	game->map->column = y;
 	game->map->length = x;
-	// printf("en theorie x vaut 4 + la newline ---> le programme la compte comme %d\n", x);
-	printf("\nen theorie y vaut 5 + la newline ---> le programme la compte comme %d\n", y);
+	// printf("en theorie x vaut 4 ---> le programme la compte comme %d\n", x);
+	printf("\nen theorie y vaut 5 et devrai valoir 4 ---> le programme la compte comme %d\n\n", y);
 	game->map->map = malloc(sizeof(char *) * (y + 1));
-
+	// printf("on malloc la dimention y avec %d + 1", y);
 	if(!game->map->map)//échec alloc hauteur
 		return (free(game->map), -1);
-	if(malloc_map(game->filename, x, y, game->map->map) == NULL)//échec de la largeur
+	if(malloc_map(game->filename, x, y, game->map->map) == NULL)//
 		return (free(game->map), -1);
 	return (0);
 }
