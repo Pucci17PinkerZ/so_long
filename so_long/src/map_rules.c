@@ -1,105 +1,92 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   map_rules.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pucci <pucci@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:42:07 by nfiora-d          #+#    #+#             */
-/*   Updated: 2025/11/18 10:36:20 by pucci            ###   ########.fr       */
+/*   Updated: 2025/11/22 20:51:59 by pucci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-int scan_item(char c)
+
+int	scan_item(char c, t_game *game)
 {
-	if(c == '')
+	if(c == 'P')
+		return (game->map->player_count++, 0);
+	if(c == 'E')
+		return (game->map->exit_count++, 0);
+	if(c == 'C')
+		return (game->map->coins_count++, 0);
+	if(c == '0'|| c == '1')
+		return (0);
+	else
+		return (-1);
 }
 
 int	scan_map(char c, int x,int y, t_game *game)
 {
 	if(y == 0 || y == game->map->column)
 	{
+		// printf("\nla valeur de x == %d\n", x);
+		// printf("la valeur de y == %d\n", y);
+		// printf("la valeur de game->map->column  == (y)%d\n", game->map->column);
+		// printf("la valeur de game->map->length  == (x)%d\n", game->map->length);
+		// printf("la valeur de char c == %c\n\n", c);
+		// printf("la valeur de \n",);
 		if(c != '1')
-		return (-1);
+			return (printf("JE PASSE PAR --LA CONDITION DU TOP ET DOWN\n"),-1);
 	}
 	else if(x == 0 || x == game->map->length)
 	{
 		if(c != '1')
-			return (-1);
+			return (printf("JE PASSE PAR --LA CONDITION DES COLONNES\n"),-1);
 	}
 	else
 	{
-		
-	}
-		scan_item();
-}
-
-int check_map(t_game *game)//check des chars c'est plus esazzy
-{
-	int y;
-
-
-	y = 0;
-	while(game->map->map[y])
-	{
-		while(game->map->map[y][x])
-		{
-			// if(game->map->map[0][x] != '1' 
-			// 	|| game->map->map[game->map->column][x] != '1')
-			if(scan_map())
-				return (-1);
-			x++;
-		}
-		// if(game->map->map[y][0] != 1 
-		// 	|| game->map->map[y][game->map->length] != 1)
-		// 	return (-1);
-		y++;
-	}
-	return (1);
-}
-
-int check_map(t_game *game) // fonction principale qui rassemble tout les checks
-{
-	
-	if(check_walls(game) == -1)//on check si les murs sont good
-		return (-1);// on free?
-
-}
-
-
-int check_line(char *line, int countline, int column, int length)	//fait les check suivants : les murs, la taille X * Y, les collectibles
-{
-	if(countline == 1 || countline == column) //check top et down
-	{
-		while(*line)
-		{
-			if(*line != 1)
-				return (1);
-			line++;
-		}
-	}
-	else //check le mid
-	{
-		while(*line)
-		{
-			if(*line != 1 || *line != 'E' || *line != 'C' || *line != 'P')
-				return (1);
-			line++;
-		}
-		i != length 
-			return (1);
+		if(scan_item(c, game))
+			return (printf("JE PASSE PAR --SCAN ITEM\n"),-1);
 	}
 	return (0);
 }
 
-
-
-int main (void)
+int count_item(t_game *game)
 {
-	char tab[] = "level1";
-	printf("%d",checklength(tab));
+	if(game->map->player_count != 1)
+		return (-1);
+	if(game->map->exit_count != 1)
+		return (-1);
+	if(game->map->coins_count <= 0)
+		return (-1);
+	return (0);
 }
+
+int	check_map(t_game *game)
+{
+	int y;
+	int x;
+
+	y = 0;
+	
+	while(game->map->map[y])
+	{
+		x = 0;
+		while(game->map->map[y][x])
+		{
+			if(scan_map(game->map->map[y][x], x, y, game))
+				return (-1);//l'erreur passe par ici
+			x++;
+		}
+		y++;
+	}
+	
+	if (count_item(game))
+		return (-1);
+	return (0);
+}
+
 //Purpose: Reads the map file and populates the game’s map array.
 //Implementation Tips:
 //Check that each line is the same length.
