@@ -6,7 +6,7 @@
 # include <stdlib.h>
 # include "../gnl/get_next_line.h"
 # include "../libft/libft.h"
-// # include "../mlx/mlx.h"
+# include "../mlx/mlx.h"
 // # include "../printf/ft_printf.h"
 
 
@@ -19,6 +19,15 @@ typedef struct s_map
 	int player_count;
 	int exit_count;
 } t_map;
+
+typedef struct s_sprite
+{
+	player
+	wall
+	coins
+	ground
+	exit
+} t_sprite;
 
 typedef struct s_game
 {

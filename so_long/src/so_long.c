@@ -10,7 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+    //    void *
+    //    mlx_new_window ( void *mlx_ptr, int size_x, int size_y, char *title );
+
+    //    int
+    //    mlx_clear_window ( void *mlx_ptr, void *win_ptr );
+
+    //    int
+    //    mlx_destroy_window ( void *mlx_ptr, void *win_ptr );
+
+
 # include "so_long.h"
+
+/*
+
+*/
+
+int mlx_windows_start(void)
+{
+	void *mlx_ptr;
+	void *win_ptr;//identifiant de la fentre
+
+	mlx_ptr = mlx_init();
+	win_ptr = mlx_new_window(mlx_ptr, 64, 64, "so_long");
+	(void)win_ptr;
+	mlx_loop(mlx_ptr);//mlx loop gère les évenemnt
+	return (0);
+}
+
 
 int main (int argc, char **argv)
 {
@@ -44,6 +71,8 @@ int main (int argc, char **argv)
 	}
 	printf("\nla map remplit les conditions :)\n");
 		
+	mlx_windows_start();
+
 	free(game->map);
 	free(game);
 	

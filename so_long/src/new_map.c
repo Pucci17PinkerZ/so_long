@@ -67,10 +67,9 @@ char	**malloc_map(const char *filename, int x, int column, char **map)	//check l
 	fd = open(filename, O_RDONLY);
 	if(fd == -1 || !map)
 		return (NULL);
-			printf("column == %d\n",column);
+			// printf("column == %d\n",column);
 	while(y < column)
 	{
-		printf("y == %d\n",y);
 		ref_line = get_next_line(fd);
 		if(column - 1 == y && ref_line[x] == '\n')
 			return (NULL);
@@ -110,10 +109,10 @@ int	new_map(t_game *game)	//-1 si error 1 si true
 		return (-1);
 	game->map->column = y;
 	game->map->length = x;
-	printf("en theorie x vaut 7 ---> le programme la compte comme %d\n", x);
-	printf("\nnbr de ligne réel 5\nnbr de ligne avec \\n 4\nvaleur de y == %d\n", y);
+	// printf("en theorie x vaut 7 ---> le programme la compte comme %d\n", x);
+	// printf("\nnbr de ligne réel 5\nnbr de ligne avec \\n 4\nvaleur de y == %d\n", y);
 	game->map->map = malloc(sizeof(char *) * (y + 1));
-	printf("on malloc la dimention y avec %d + 1\n", y);
+	// printf("on malloc la dimention y avec %d + 1\n", y);
 	if(!game->map->map)//échec alloc hauteur
 		return (free(game->map), -1);
 	if(malloc_map(game->filename, x, y, game->map->map) == NULL)
