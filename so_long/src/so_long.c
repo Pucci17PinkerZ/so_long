@@ -6,7 +6,7 @@
 /*   By: pucci <pucci@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:25:50 by pucci             #+#    #+#             */
-/*   Updated: 2025/11/26 18:18:29 by pucci            ###   ########.fr       */
+/*   Updated: 2025/11/26 18:45:21 by pucci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int main (int argc, char **argv)
 	game->sprite = malloc(sizeof(t_sprite));
 	game->mlx = malloc(sizeof(t_mlx));
 	game->map = malloc(sizeof(t_map));
-	game->sprite->img_height = 128;
-	game->sprite->img_width = 128;
+	game->sprite->img_height = 64;
+	game->sprite->img_width = 64;
 	game->filename = argv[1];
 	// printf("argv[1] == %s\n", argv[1]);
 	int z = new_map(game);
