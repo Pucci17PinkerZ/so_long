@@ -18,3 +18,10 @@ void	free_map(char **map, int y)
 		free(map[--y]);
 	free(map);
 }
+
+void set_free(t_game *game)
+{
+	free(game->map);
+	free(game->mlx);
+	free(game->sprite);
+}

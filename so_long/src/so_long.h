@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pucci <pucci@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/26 15:57:27 by pucci             #+#    #+#             */
+/*   Updated: 2025/11/26 17:43:35 by pucci            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
@@ -12,29 +25,42 @@
 
 typedef struct s_map
 {
-	char **map;
-	int length;
-	int column;
-	int coins_count;
-	int player_count;
-	int exit_count;
+	char	**map;
+	int		length;
+	int		column;
+	int		coins_count;
+	int		player_count;
+	int		exit_count;
+
+
 } t_map;
+
+typedef struct s_mlx {
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int		win_width;
+	int		win_height;
+} t_mlx;
 
 typedef struct s_sprite
 {
-	player
-	wall
-	coins
-	ground
-	exit
+	void	*img_wall;
+	void	*img_floor;
+	void	*img_coin;
+	void	*img_player;
+	void	*img_exit;
+	int		img_width;
+	int		img_height;
 } t_sprite;
 
 typedef struct s_game
 {
 	const char *filename;
+	t_sprite *sprite;
 	t_map *map;
-} t_game ;
+	t_mlx *mlx;
 
+} t_game;
 
 int *read_map(const char *filename, t_game *game);
 
@@ -51,7 +77,17 @@ int count_item(t_game *game);
 int	check_map(t_game *game);
 int	floodfill(t_game *game, int y, int x);
 
+//pour la fenetre
+void	init_sprite(t_mlx *mlx, t_sprite *sp);
+int mlx_windows_start(t_mlx *mlx, t_map *map, t_sprite *sprite);
+int	mlx_hookloop(t_mlx *mlx);
+int	close_window(t_mlx *mlx);
+
+//pour set les valeurs
+void set_game(t_game *game, char *filename);
+
 //pour les leaks
 void	free_map(char **map, int y);
+void	set_free(t_game *game);
 
 #endif

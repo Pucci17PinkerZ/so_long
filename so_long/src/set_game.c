@@ -1,8 +1,22 @@
-void set_game(t_game *game, char *filename)
-{
-	game = malloc(sizeof(t_game));
-	game->filename = filename;
-	game->map = malloc(sizeof(t_map));
-	game->map->length = 0;
-	game->map->column = 0;
-}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_game.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pucci <pucci@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/26 15:57:38 by pucci             #+#    #+#             */
+/*   Updated: 2025/11/26 15:57:39 by pucci            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "so_long.h"
+
+// void set_game(t_game *game, char *filename)
+// {
+
+
+// 	// if(!t_game || !t_map|| !t_mlx|| !t_sprite)
+// 	// 	return (0);
+// }

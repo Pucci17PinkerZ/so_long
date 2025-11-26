@@ -34,7 +34,7 @@ int	scan_map(char c, int x,int y, t_game *game)
 		// printf("la valeur de char c == %c\n\n", c);
 	if(y == 0 || y == game->map->column - 1)
 	{
-		printf("la valeur de game->map->column == %d\n",game->map->column);
+		// printf("la valeur de game->map->column == %d\n",game->map->column);
 		// printf("la valeur de \n",);
 		if(c != '1')
 			return (printf("JE PASSE PAR --LA CONDITION DU TOP ET DOWN\n"),-1);
