@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-int	check_length(const char *filename)	//check la longeur de la ligne comme base de referance
+int	check_length(const char *filename)
 {
 	int		i;
 	int		fd;
@@ -26,7 +26,6 @@ int	check_length(const char *filename)	//check la longeur de la ligne comme base
 		return (-1);
 	while(ref_line[i] != '\n')
 		i++;
-	// printf("\naprès le comptage x vaut == %d en longeur de tableau\n", i);
 	close(fd);
 	return (free(ref_line), i);
 }
@@ -55,7 +54,7 @@ int	check_column(const char *filename)
 	return (count);
 }
 
-char	**malloc_map(const char *filename, int x, int column, char **map)	//check la longeur de la ligne comme base de referance
+char	**malloc_map(const char *filename, int x, int column, char **map)
 {
 	int i;
 	int y;
@@ -67,7 +66,7 @@ char	**malloc_map(const char *filename, int x, int column, char **map)	//check l
 	fd = open(filename, O_RDONLY);
 	if(fd == -1 || !map)
 		return (NULL);
-			// printf("column == %d\n",column);
+
 	while(y < column)
 	{
 		ref_line = get_next_line(fd);
@@ -91,7 +90,7 @@ char	**malloc_map(const char *filename, int x, int column, char **map)	//check l
 	return (map);
 }
 
-int	new_map(t_game *game)	//-1 si error 1 si true
+int	new_map(t_game *game)
 {
 	int	x;
 	int	y;
@@ -101,21 +100,15 @@ int	new_map(t_game *game)	//-1 si error 1 si true
 	x = check_length(game->filename);
 	if(x == -1)
 		return (-1);
-	y = check_column(game->filename);//prends le last \n
+	y = check_column(game->filename);
 	if(y == -1)
 		return (-1);
-	game->map = malloc(sizeof(t_map));
-	if(!game->map)
+	game->map.column = y;
+	game->map.length = x;
+	game->map.map = malloc(sizeof(char *) * (y + 1));
+	if(!game->map.map)
 		return (-1);
-	game->map->column = y;
-	game->map->length = x;
-	// printf("en theorie x vaut 7 ---> le programme la compte comme %d\n", x);
-	// printf("\nnbr de ligne réel 5\nnbr de ligne avec \\n 4\nvaleur de y == %d\n", y);
-	game->map->map = malloc(sizeof(char *) * (y + 1));
-	// printf("on malloc la dimention y avec %d + 1\n", y);
-	if(!game->map->map)//échec alloc hauteur
-		return (free(game->map), -1);
-	if(malloc_map(game->filename, x, y, game->map->map) == NULL)
-		return (free(game->map), -1);
+	if(malloc_map(game->filename, x, y, game->map.map) == NULL)
+		return (-1);
 	return (0);
 }

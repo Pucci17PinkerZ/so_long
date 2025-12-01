@@ -56,9 +56,9 @@ typedef struct s_sprite
 typedef struct s_game
 {
 	const char *filename;
-	t_sprite *sprite;
-	t_map *map;
-	t_mlx *mlx;
+	t_sprite	sprite;
+	t_map	map;
+	t_mlx	mlx;
 
 } t_game;
 
@@ -70,6 +70,12 @@ char	**malloc_map(const char *filename, int x, int column, char **map);
 int	check_column(const char *filename);
 int	check_length(const char *filename);
 
+//pour set le jeu
+void	init_game(t_game *game);
+void	init_sprite(t_sprite *sprite);
+void	init_mlx(t_mlx *mlx);
+void	init_map(t_map *map);
+
 //pour les check de map
 int	scan_item(char c, t_game *game);
 int	scan_map(char c, int x,int y, t_game *game);
@@ -78,10 +84,12 @@ int	check_map(t_game *game);
 int	floodfill(t_game *game, int y, int x);
 
 //pour la fenetre
-void	init_sprite(t_mlx *mlx, t_sprite *sp);
-int mlx_windows_start(t_mlx *mlx, t_map *map, t_sprite *sprite);
-int	mlx_hookloop(t_mlx *mlx);
-int	close_window(t_mlx *mlx);
+int	load_sprite(t_game *game);
+int mlx_windows_start(t_game *game);
+int	mlx_hookloop(t_game *game);
+int	close_window(t_game *game);
+int	put_img(t_game *game);
+int sprite_to_put(t_game *game, int x , int y);
 
 //pour set les valeurs
 void set_game(t_game *game, char *filename);

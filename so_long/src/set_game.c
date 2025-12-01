@@ -13,10 +13,47 @@
 
 #include "so_long.h"
 
-// void set_game(t_game *game, char *filename)
-// {
+void	init_game(t_game *game)
+{
+	if (!game)
+		return;
+	game->filename = NULL;
+	init_sprite(&game->sprite);
+	init_map(&game->map);
+	init_mlx(&game->mlx);
+}
 
+void	init_sprite(t_sprite *sprite)
+{
+	if (!sprite)
+		return;
+	sprite->img_wall = NULL;
+	sprite->img_floor = NULL;
+	sprite->img_coin = NULL;
+	sprite->img_player = NULL;
+	sprite->img_exit = NULL;
+	sprite->img_width = 0;
+	sprite->img_height = 0;
+}
+void	init_mlx(t_mlx *mlx)
+{
+	if (!mlx)
+		return;
+	
+	mlx->mlx_ptr = NULL;
+	mlx->win_ptr = NULL;
+	mlx->win_width = 0;
+	mlx->win_height = 0;
+}
 
-// 	// if(!t_game || !t_map|| !t_mlx|| !t_sprite)
-// 	// 	return (0);
-// }
+void	init_map(t_map *map)
+{
+	if (!map)
+		return;
+	map->map = NULL;
+	map->length = 0;
+	map->column = 0;
+	map->coins_count = 0; 
+	map->player_count = 0;
+	map->exit_count = 0;  
+}
