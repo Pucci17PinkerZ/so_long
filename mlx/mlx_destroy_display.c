@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_them.c                                        :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pucci <pucci@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 17:13:27 by pucci             #+#    #+#             */
-/*   Updated: 2025/11/18 17:14:22 by pucci            ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "mlx_int.h"
 
-void	free_map(char **map, int y)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	while (y > 0)
-		free(map[--y]);
-	free(map);
+	XCloseDisplay(xvar->display);
 }
-
-// void set_free(t_game *game)
-// {
-// 	free(game->map);
-// 	free(game->mlx);
-// 	free(game->sprite);
-// }
