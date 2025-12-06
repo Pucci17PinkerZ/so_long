@@ -12,6 +12,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = $(DIRSRC)/so_long.c \
 	$(DIRSRC)/new_map.c\
+	$(DIRSRC)/player_move.c\
 	$(DIRSRC)/map_rules.c\
 	$(DIRSRC)/free_them.c\
 	$(DIRSRC)/floodfill.c\

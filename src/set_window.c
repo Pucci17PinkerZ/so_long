@@ -12,13 +12,15 @@
 
 
 #include "so_long.h"
-
+/*  ========================FONCTION QUI AGISSEMNT DANS LA LOOP======================*/
 int	close_window(t_game *game)
 {
 	mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
 	return (0);
 }
 
+void	move_
+/* ===================================================================== */
 int	mlx_hookloop(t_game *game)
 {
 	// mlx_hook(mlx.win_ptr,/*touche pressé*/, /*0?*/,/*fonction applé*/,/*paramètre de la fonction appelé*/);
@@ -28,23 +30,21 @@ int	mlx_hookloop(t_game *game)
 	return (0);
 }
 
-
-
 int	load_sprite(t_game *game)
 {
-	game->sprite.img_player = mlx_xpm_file_to_image(game->mlx.mlx_ptr, "assets/player.xpm", &game->sprite.img_width, &game->sprite.img_height);
+	game->sprite.img_player = mlx_xpm_file_to_image(game->mlx.mlx_ptr, "assets/player1.xpm", &game->sprite.img_width, &game->sprite.img_height);
 	if (!game->sprite.img_player) 
 		return (printf("ERREUR: impossible de charger player.xpm\n"), 1);
-	game->sprite.img_wall = mlx_xpm_file_to_image(game->mlx.mlx_ptr, "assets/wall.xpm", &game->sprite.img_width , &game->sprite.img_height);
+	game->sprite.img_wall = mlx_xpm_file_to_image(game->mlx.mlx_ptr, "assets/wall1.xpm", &game->sprite.img_width , &game->sprite.img_height);
 	if (!game->sprite.img_wall) 
 		return (printf("ERREUR: impossible de charger wall.xpm\n"), 1);
-	game->sprite.img_floor = mlx_xpm_file_to_image(game->mlx.mlx_ptr, "assets/floor.xpm", &game->sprite.img_width, &game->sprite.img_height);
+	game->sprite.img_floor = mlx_xpm_file_to_image(game->mlx.mlx_ptr, "assets/floor1.xpm", &game->sprite.img_width, &game->sprite.img_height);
 	if (!game->sprite.img_floor) 
 		return (printf("ERREUR: impossible de charger floor.xpm\n"), 1);
-	game->sprite.img_coin = mlx_xpm_file_to_image(game->mlx.mlx_ptr, "assets/coin.xpm", &game->sprite.img_width, &game->sprite.img_height);
+	game->sprite.img_coin = mlx_xpm_file_to_image(game->mlx.mlx_ptr, "assets/coin1.xpm", &game->sprite.img_width, &game->sprite.img_height);
 	if (!game->sprite.img_coin) 
 		return (printf("ERREUR: impossible de charger coin.xpm\n"), 1);
-	game->sprite.img_exit = mlx_xpm_file_to_image(game->mlx.mlx_ptr, "assets/exit.xpm", &game->sprite.img_width, &game->sprite.img_height);
+	game->sprite.img_exit = mlx_xpm_file_to_image(game->mlx.mlx_ptr, "assets/exit1.xpm", &game->sprite.img_width, &game->sprite.img_height);
 	if (!game->sprite.img_exit) 
 		return (printf("ERREUR: impossible de charger exit.xpm\n"), 1);
 	return (0);
@@ -78,19 +78,19 @@ int sprite_to_put(t_game *game, int x , int y)
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr, game->sprite.img_floor, x * 128, y * 128);
 		printf("\nfloor à été utilisé\n");
 	}
-		
+
 	if(game->map.map[y][x] == '1')
 	{
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr, game->sprite.img_wall, x * 128, y * 128);
 		printf("\nwall à été utilisé\n");
 	}
-	
+
 	if(game->map.map[y][x] == 'P')
 	{
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr, game->sprite.img_player, x * 128, y * 128);
 		printf("\nplayer à été utilisé\n");
 	}
-		
+
 	if(game->map.map[y][x] == 'E')
 	{
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr, game->sprite.img_exit, x * 128, y * 128);
@@ -102,7 +102,6 @@ int sprite_to_put(t_game *game, int x , int y)
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr, game->sprite.img_coin, x * 128, y * 128);
 		printf("\ncoin à été utilisé\n");
 	}
-
 	return (0);
 }
 
