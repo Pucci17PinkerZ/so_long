@@ -10,22 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "so_long.h"
-/*  ========================FONCTION QUI AGISSEMNT DANS LA LOOP======================*/
+/*  ========================FONCTION QUI AGISSEMENT DANS LA LOOP======================*/
 int	close_window(t_game *game)
 {
 	mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
 	return (0);
 }
 
-void	move_
-/* ===================================================================== */
+void update_movement(t_game *game)
+{
+	// Vérifier quelles touches sont pressées ACTUELLEMENT
+	if (game->key_pressed[KEY_W] || game->key_pressed[KEY_UP])
+		move_player(game, 0, -1);  // Haut
+	if (game->key_pressed[KEY_S] || game->key_pressed[KEY_DOWN])
+		move_player(game, 0, 1);   // Bas
+	if (game->key_pressed[KEY_A] || game->key_pressed[KEY_LEFT])
+		move_player(game, -1, 0);  // Gauche
+	if (game->key_pressed[KEY_D] || game->key_pressed[KEY_RIGHT])
+		move_player(game, 1, 0);   // Droite
+	if (game->key_pressed[KEY_D] || game->key_pressed[KEY_RIGHT])
+		close_window (game);   // ESC
+}
+/*===================================================================== */
 int	mlx_hookloop(t_game *game)
 {
-	// mlx_hook(mlx.win_ptr,/*touche pressé*/, /*0?*/,/*fonction applé*/,/*paramètre de la fonction appelé*/);
 	mlx_hook(game->mlx.win_ptr, 17, 0, close_window, game);
-	// mlx_hook(game->mlx.win_ptr,17,0,close_window,game->mlx);
+	mlx_loop_hook(game->mlx.mlx_ptr,update_movement, game) //fonction qui sera rappellé régulièrement 
 	mlx_loop(game->mlx.mlx_ptr);
 	return (0);
 }

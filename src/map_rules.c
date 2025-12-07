@@ -42,6 +42,8 @@ int	scan_map(char c, int x,int y, t_game *game)
 	{
 		if(scan_item(c, game))
 			return (printf("JE PASSE PAR --SCAN ITEM\n"),-1);
+		if(game->map->map[y][x] == 'p')
+			set_player(game, x, y)
 	}
 	return (0);
 }

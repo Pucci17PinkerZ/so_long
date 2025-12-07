@@ -14,6 +14,11 @@
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
+#define KEY_UP 65362
+#define KEY_DOWN 65364
+#define KEY_LEFT 65361
+#define KEY_RIGHT 65363
+
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -59,7 +64,9 @@ typedef struct s_game
 	t_sprite	sprite;
 	t_map	map;
 	t_mlx	mlx;
-
+	int player_x;//placemement du joueur sur l'axe respectif
+	int player_y;
+	int key_pressed[256];
 } t_game;
 
 int *read_map(const char *filename, t_game *game);
