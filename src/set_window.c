@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+
 /*  ========================FONCTION QUI AGISSEMENT DANS LA LOOP======================*/
 int	close_window(t_game *game)
 {
@@ -18,25 +19,58 @@ int	close_window(t_game *game)
 	return (0);
 }
 
+void	move_player(t_game *game, int x, int y)
+{
+	if (game->map.map[player_y + y][player_x + x] == 1)
+	{
+		player_mov++;
+		return ;
+	}
+	else
+		
+}
+
 void update_movement(t_game *game)
 {
-	// Vérifier quelles touches sont pressées ACTUELLEMENT
-	if (game->key_pressed[KEY_W] || game->key_pressed[KEY_UP])
-		move_player(game, 0, -1);  // Haut
-	if (game->key_pressed[KEY_S] || game->key_pressed[KEY_DOWN])
-		move_player(game, 0, 1);   // Bas
-	if (game->key_pressed[KEY_A] || game->key_pressed[KEY_LEFT])
-		move_player(game, -1, 0);  // Gauche
-	if (game->key_pressed[KEY_D] || game->key_pressed[KEY_RIGHT])
-		move_player(game, 1, 0);   // Droite
-	if (game->key_pressed[KEY_D] || game->key_pressed[KEY_RIGHT])
-		close_window (game);   // ESC
+
+	if (game->key_pressed[KEY_W])
+		move_player(game, 0, -1);
+	if (game->key_pressed[KEY_S])
+		move_player(game, 0, 1);
+	if (game->key_pressed[KEY_A])
+		move_player(game, -1, 0);
+	if (game->key_pressed[KEY_D])
+		move_player(game, 1, 0);
+	if (game->key_pressed[KEY_D])
+		close_window (game);
 }
+int key_press(int keycode, t_game *game)
+{
+	if (keycode >= 0 && keycode < 256)
+		game->key_pressed[keycode] = 1;
+
+	if (keycode == 65307)
+		close_window(game);
+
+	return (0);
+}
+
+int key_release(int keycode, t_game *game)
+{
+
+	if (keycode >= 0 && keycode < 256)
+		game->key_pressed[keycode] = 0;
+	
+	return (0);
+}
+
 /*===================================================================== */
 int	mlx_hookloop(t_game *game)
 {
 	mlx_hook(game->mlx.win_ptr, 17, 0, close_window, game);
-	mlx_loop_hook(game->mlx.mlx_ptr,update_movement, game) //fonction qui sera rappellé régulièrement 
+	mlx_hook(game->mlx.win_ptr, 2, 0, key_press, game);
+	mlx_hook(game->mlx.win_ptr, 2, 0, key_release, game);
+	mlx_loop_hook(game->mlx.mlx_ptr,update_movement, game);
 	mlx_loop(game->mlx.mlx_ptr);
 	return (0);
 }
