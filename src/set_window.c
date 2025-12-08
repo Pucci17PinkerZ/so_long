@@ -53,7 +53,7 @@ int update_movement(void *param)
 	game = (t_game *)param;
 	frame_count++;
 	
-	if (frame_count % 120 == 0)
+	if (frame_count % 3840 == 0)
 	{
 		if (game->key_pressed[KEY_S])
 			move_player(game,1, 0);
@@ -64,11 +64,11 @@ int update_movement(void *param)
 		if (game->key_pressed[KEY_D])
 			move_player(game, 0, 1);
 	}
-	
+
 	return (0);
 }
 
-int key_press(int keycode, void *param)
+int key_press(int keycode, void *param)/// ne pas recoder la mlx bg juste bouger de 1
 {
 	t_game *game;
 
@@ -81,7 +81,6 @@ int key_press(int keycode, void *param)
 		close_window(game);
 	return (0);
 }
-
 int key_release(int keycode, void *param)
 {
 	t_game *game;
@@ -90,16 +89,15 @@ int key_release(int keycode, void *param)
 		printf("release\n");
 	if (keycode >= 0 && keycode < 256)
 		game->key_pressed[keycode] = 0;
-	
 	return (0);
 }
+
 /*===================================================================== */
 int	mlx_hookloop(t_game *game)
 {
 	printf("Initialisation des hooks...\n");
 	mlx_hook(game->mlx.win_ptr, 17, 0, close_window, game);
-	mlx_hook(game->mlx.win_ptr, 2, 1L, key_press, game);
-	mlx_hook(game->mlx.win_ptr, 3, 2L, key_release, game);
+	mlx_hook(game->mlx.win_ptr, 2, 1L << 0, key_press, game);
 	mlx_loop_hook(game->mlx.mlx_ptr, update_movement, game);
 	mlx_loop(game->mlx.mlx_ptr);
 	return (0);
