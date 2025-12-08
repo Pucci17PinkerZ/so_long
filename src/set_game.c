@@ -21,9 +21,10 @@ void	init_game(t_game *game)
 	init_sprite(&game->sprite);
 	init_map(&game->map);
 	init_mlx(&game->mlx);
-	player_y = 0;
-	player_x = 0;
-	ft_bzero(key_pressed[0]);
+	game->player_y = 0;
+	game->player_x = 0;
+	ft_bzero(game->key_pressed, sizeof(game->key_pressed));
+	game->keycode = 0;
 }
 
 void	init_sprite(t_sprite *sprite)
@@ -59,11 +60,13 @@ void	init_map(t_map *map)
 	map->column = 0;
 	map->coins_count = 0; 
 	map->player_count = 0;
-	map->exit_count = 0;  
+	map->exit_count = 0;
+	map->coins_found = 0;
 }
 
 void	set_player(t_game * game, int x, int y)
 {
 	game->player_x = x;
 	game->player_y = y;
+	game->player_mov = 0;
 }

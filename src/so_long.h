@@ -15,8 +15,8 @@
 #define SO_LONG_H
 
 #define KEY_W 119
-#define KEY_S 97
-#define KEY_A 115
+#define KEY_S 115
+#define KEY_A 97
 #define KEY_D 100
 
 # include <stdio.h>
@@ -36,7 +36,7 @@ typedef struct s_map
 	int		coins_count;
 	int		player_count;
 	int		exit_count;
-
+	int coins_found;
 
 } t_map;
 
@@ -68,6 +68,7 @@ typedef struct s_game
 	int player_y;
 	long player_mov;
 	int key_pressed[256];
+	int keycode;
 } t_game;
 
 int *read_map(const char *filename, t_game *game);

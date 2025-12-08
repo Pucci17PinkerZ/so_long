@@ -19,58 +19,88 @@ int	close_window(t_game *game)
 	return (0);
 }
 
-void	move_player(t_game *game, int x, int y)
+void	move_player(t_game *game, int y, int x)
 {
-	if (game->map.map[player_y + y][player_x + x] == 1)
+	if (game->map.map[game->player_y + y][game->player_x + x] == '1')
 	{
-		player_mov++;
+		game->player_mov++;
 		return ;
 	}
+
 	else
-		
+	{
+		if(game->map.map[game->player_y + y][game->player_x + x] == 'C')
+		{
+			game->map.map[game->player_y + y][game->player_x + x] = '0';
+			game->map.coins_found++;
+		}
+		game->map.map[game->player_y][game->player_x] = '0';
+		sprite_to_put(game, game->player_x, game->player_y);
+		game->map.map[game->player_y + y][game->player_x + x] = 'P';
+		game->player_y += y;
+		game->player_x += x;
+		sprite_to_put(game, game->player_x, game->player_y);
+		game->player_mov++;
+	}
+	printf("position du joueur et de map[%d][%d]\n",game->player_y , game->player_x);
 }
 
-void update_movement(t_game *game)
+int update_movement(void *param)
 {
+	static long long frame_count;
+	t_game *game;
 
-	if (game->key_pressed[KEY_W])
-		move_player(game, 0, -1);
-	if (game->key_pressed[KEY_S])
-		move_player(game, 0, 1);
-	if (game->key_pressed[KEY_A])
-		move_player(game, -1, 0);
-	if (game->key_pressed[KEY_D])
-		move_player(game, 1, 0);
-	if (game->key_pressed[KEY_D])
-		close_window (game);
-}
-int key_press(int keycode, t_game *game)
-{
-	if (keycode >= 0 && keycode < 256)
-		game->key_pressed[keycode] = 1;
-
-	if (keycode == 65307)
-		close_window(game);
-
+	game = (t_game *)param;
+	frame_count++;
+	
+	if (frame_count % 120 == 0)
+	{
+		if (game->key_pressed[KEY_S])
+			move_player(game,1, 0);
+		if (game->key_pressed[KEY_W])
+			move_player(game,-1, 0);
+		if (game->key_pressed[KEY_A])
+			move_player(game, 0, -1);
+		if (game->key_pressed[KEY_D])
+			move_player(game, 0, 1);
+	}
+	
 	return (0);
 }
 
-int key_release(int keycode, t_game *game)
+int key_press(int keycode, void *param)
 {
+	t_game *game;
 
+	game = (t_game *)param;
+	if (keycode >= 0 && keycode < 256)
+	{
+		game->key_pressed[keycode] = 1;
+	}
+	if (keycode == 65307)
+		close_window(game);
+	return (0);
+}
+
+int key_release(int keycode, void *param)
+{
+	t_game *game;
+
+	game = (t_game *)param;
+		printf("release\n");
 	if (keycode >= 0 && keycode < 256)
 		game->key_pressed[keycode] = 0;
 	
 	return (0);
 }
-
 /*===================================================================== */
 int	mlx_hookloop(t_game *game)
 {
+	printf("Initialisation des hooks...\n");
 	mlx_hook(game->mlx.win_ptr, 17, 0, close_window, game);
-	mlx_hook(game->mlx.win_ptr, 2, 0, key_press, game);
-	mlx_hook(game->mlx.win_ptr, 2, 0, key_release, game);
-	mlx_loop_hook(game->mlx.mlx_ptr,update_movement, game);
+	mlx_hook(game->mlx.win_ptr, 2, 1L, key_press, game);
+	mlx_hook(game->mlx.win_ptr, 3, 2L, key_release, game);
+	mlx_loop_hook(game->mlx.mlx_ptr, update_movement, game);
 	mlx_loop(game->mlx.mlx_ptr);
 	return (0);
 }
@@ -107,7 +137,7 @@ int	put_img(t_game *game)
 		x = 0;
 		while(x < game->map.length)
 		{
-			printf("\nx == %d\ny == %d\n la vale à game->map->map[%d][%d] est de '%c'\n", x, y, y, x, game->map.map[y][x]);
+			// printf("\nx == %d\ny == %d\n la valeur à game->map->map[%d][%d] est de '%c'\n", x, y, y, x, game->map.map[y][x]);
 			sprite_to_put(game, x, y);
 			x++;
 		}
@@ -116,36 +146,33 @@ int	put_img(t_game *game)
 	
 	return (0);
 }
+
 int sprite_to_put(t_game *game, int x , int y)
 {
 	if(game->map.map[y][x] == '0')
 	{
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr, game->sprite.img_floor, x * 128, y * 128);
-		printf("\nfloor à été utilisé\n");
+		// printf("\nfloor à été utilisé\n");
 	}
-
 	if(game->map.map[y][x] == '1')
 	{
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr, game->sprite.img_wall, x * 128, y * 128);
-		printf("\nwall à été utilisé\n");
+		// printf("\nwall à été utilisé\n");
 	}
-
 	if(game->map.map[y][x] == 'P')
 	{
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr, game->sprite.img_player, x * 128, y * 128);
-		printf("\nplayer à été utilisé\n");
+		// printf("\nplayer à été utilisé\n");
 	}
-
 	if(game->map.map[y][x] == 'E')
 	{
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr, game->sprite.img_exit, x * 128, y * 128);
-		printf("\nexit à été utilisé\n");
+		// printf("\nexit à été utilisé\n");
 	}
-
 	if(game->map.map[y][x] == 'C')
 	{
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr, game->sprite.img_coin, x * 128, y * 128);
-		printf("\ncoin à été utilisé\n");
+		// printf("\ncoin à été utilisé\n");
 	}
 	return (0);
 }

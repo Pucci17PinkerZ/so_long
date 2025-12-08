@@ -42,4 +42,5 @@ int main (int argc, char **argv)
 	printf("\nla map remplit les conditions :)\n");
 		
 	mlx_windows_start(&game);
+	
 }
