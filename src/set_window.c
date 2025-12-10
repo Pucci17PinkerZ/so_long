@@ -16,6 +16,7 @@
 int	close_window(t_game *game)
 {
 	mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
+	exit (0);
 	return (0);
 }
 
@@ -45,60 +46,37 @@ void	move_player(t_game *game, int y, int x)
 	printf("position du joueur et de map[%d][%d]\n",game->player_y , game->player_x);
 }
 
-int update_movement(void *param)
+int update_movement(int keycode, t_game *game)
 {
-	static long long frame_count;
-	t_game *game;
+	// static long long frame_count;
+	// t_game *game;
 
-	game = (t_game *)param;
-	frame_count++;
+	// game = (t_game *)param;
+	// frame_count++;
 	
-	if (frame_count % 3840 == 0)
-	{
-		if (game->key_pressed[KEY_S])
+	// if (frame_count % 60 == 0)
+	// {
+		if (keycode == KEY_S)
 			move_player(game,1, 0);
-		if (game->key_pressed[KEY_W])
+		if (keycode == KEY_W)
 			move_player(game,-1, 0);
-		if (game->key_pressed[KEY_A])
+		if (keycode == KEY_A)
 			move_player(game, 0, -1);
-		if (game->key_pressed[KEY_D])
+		if (keycode == KEY_D)
 			move_player(game, 0, 1);
-	}
+		if (keycode == KEY_ESC)
+			close_window(game);
+		all_coin_collected(game);
+	// }
 
 	return (0);
 }
-
-int key_press(int keycode, void *param)/// ne pas recoder la mlx bg juste bouger de 1
-{
-	t_game *game;
-
-	game = (t_game *)param;
-	if (keycode >= 0 && keycode < 256)
-	{
-		game->key_pressed[keycode] = 1;
-	}
-	if (keycode == 65307)
-		close_window(game);
-	return (0);
-}
-int key_release(int keycode, void *param)
-{
-	t_game *game;
-
-	game = (t_game *)param;
-		printf("release\n");
-	if (keycode >= 0 && keycode < 256)
-		game->key_pressed[keycode] = 0;
-	return (0);
-}
-
 /*===================================================================== */
 int	mlx_hookloop(t_game *game)
 {
 	printf("Initialisation des hooks...\n");
 	mlx_hook(game->mlx.win_ptr, 17, 0, close_window, game);
-	mlx_hook(game->mlx.win_ptr, 2, 1L << 0, key_press, game);
-	mlx_loop_hook(game->mlx.mlx_ptr, update_movement, game);
+	mlx_hook(game->mlx.win_ptr, 2, 1L << 0, update_movement, game);
 	mlx_loop(game->mlx.mlx_ptr);
 	return (0);
 }
@@ -164,7 +142,7 @@ int sprite_to_put(t_game *game, int x , int y)
 	}
 	if(game->map.map[y][x] == 'E')
 	{
-		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr, game->sprite.img_exit, x * 128, y * 128);
+		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr, game->sprite.img_floor, x * 128, y * 128);
 		// printf("\nexit à été utilisé\n");
 	}
 	if(game->map.map[y][x] == 'C')

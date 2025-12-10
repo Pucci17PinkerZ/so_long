@@ -25,6 +25,8 @@ void	init_game(t_game *game)
 	game->player_x = 0;
 	ft_bzero(game->key_pressed, sizeof(game->key_pressed));
 	game->keycode = 0;
+	game->hidden_door_x = 0;
+	game->hidden_door_y = 0;
 }
 
 void	init_sprite(t_sprite *sprite)

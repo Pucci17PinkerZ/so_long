@@ -17,6 +17,7 @@ SRC = $(DIRSRC)/so_long.c \
 	$(DIRSRC)/free_them.c\
 	$(DIRSRC)/floodfill.c\
 	$(DIRSRC)/set_window.c\
+	$(DIRSRC)/win_game.c\
 	$(DIRSRC)/set_game.c\
 	$(DIRGNL)/get_next_line.c \
 	$(DIRGNL)/get_next_line_utils.c \

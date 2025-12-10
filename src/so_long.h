@@ -18,6 +18,7 @@
 #define KEY_S 115
 #define KEY_A 97
 #define KEY_D 100
+#define KEY_ESC 65307
 
 # include <stdio.h>
 # include <unistd.h>
@@ -69,6 +70,8 @@ typedef struct s_game
 	long player_mov;
 	int key_pressed[256];
 	int keycode;
+	int hidden_door_y;
+	int hidden_door_x;
 } t_game;
 
 int *read_map(const char *filename, t_game *game);
@@ -107,5 +110,8 @@ void set_game(t_game *game, char *filename);
 //pour les leaks
 void	free_map(char **map, int y);
 void	set_free(t_game *game);
+
+// pour win le jeu
+void	all_coin_collected(t_game * game);
 
 #endif

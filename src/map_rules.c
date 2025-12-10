@@ -45,6 +45,11 @@ int	scan_map(char c, int x,int y, t_game *game)
 		if(game->map.map[y][x] == 'P')
 			set_player(game, x, y);
 	}
+	if(game->map.map[y][x] == 'E')
+	{
+		game->hidden_door_y = y;
+		game->hidden_door_x = x;
+	}
 	return (0);
 }
 
