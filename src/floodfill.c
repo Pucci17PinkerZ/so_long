@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   floodfill.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pucci <pucci@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pucci_pinker <pucci_pinker@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:12:35 by pucci             #+#    #+#             */
-/*   Updated: 2025/11/22 18:32:15 by pucci            ###   ########.fr       */
+/*   Updated: 2025/12/10 15:04:17 by pucci_pinke      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "so_long.h"
-
 // int	floodfill(t_game *game, int y, int x)//retourne 1 si la map est possible sinon 0
 // {
 // 	if(!game)

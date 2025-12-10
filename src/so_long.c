@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pucci <pucci@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pucci_pinker <pucci_pinker@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:25:50 by pucci             #+#    #+#             */
-/*   Updated: 2025/11/26 18:45:21 by pucci            ###   ########.fr       */
+/*   Updated: 2025/12/10 14:55:43 by pucci_pinke      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "so_long.h"
 
-
 int main (int argc, char **argv)
 {
 	t_game	game;
-	if(argc == 1)
+	if (argc == 1)
 	{
 		printf("utilisation\n|----> ./so_long <map.ber>\n");
 		return (0);
@@ -34,7 +33,7 @@ int main (int argc, char **argv)
 	int z = new_map(&game);
 		printf("Return value de new_map == %d\n", z);
 
-	if(check_map(&game))
+	if (check_map(&game))
 	{
 		printf("la map ne remplit pas les conditions :'(");
 		return (0);

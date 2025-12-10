@@ -9,14 +9,12 @@
 /*   Updated: 2025/11/26 15:57:39 by pucci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 #include "so_long.h"
 
 void	init_game(t_game *game)
 {
 	if (!game)
-		return;
+		return ;
 	game->filename = NULL;
 	init_sprite(&game->sprite);
 	init_map(&game->map);
@@ -32,7 +30,7 @@ void	init_game(t_game *game)
 void	init_sprite(t_sprite *sprite)
 {
 	if (!sprite)
-		return;
+		return ;
 	sprite->img_wall = NULL;
 	sprite->img_floor = NULL;
 	sprite->img_coin = NULL;
@@ -45,8 +43,7 @@ void	init_sprite(t_sprite *sprite)
 void	init_mlx(t_mlx *mlx)
 {
 	if (!mlx)
-		return;
-	
+		return ;
 	mlx->mlx_ptr = NULL;
 	mlx->win_ptr = NULL;
 	mlx->win_width = 0;
@@ -56,19 +53,20 @@ void	init_mlx(t_mlx *mlx)
 void	init_map(t_map *map)
 {
 	if (!map)
-		return;
+		return ;
 	map->map = NULL;
 	map->length = 0;
 	map->column = 0;
-	map->coins_count = 0; 
+	map->coins_count = 0;
 	map->player_count = 0;
 	map->exit_count = 0;
 	map->coins_found = 0;
 }
 
-void	set_player(t_game * game, int x, int y)
+void	set_player(t_game *game, int x, int y)
 {
 	game->player_x = x;
 	game->player_y = y;
 	game->player_mov = 0;
+	return ;
 }
