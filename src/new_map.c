@@ -17,10 +17,11 @@ int	check_length(const char *filename)
 	int		i;
 	int		fd;
 	char	*ref_line;
+
 	i = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return(-1);
+		return (-1);
 	ref_line = get_next_line(fd);
 	if (ref_line == NULL)
 		return (-1);
@@ -44,9 +45,9 @@ int	check_column(const char *filename)
 	{
 		check = get_next_line(fd);
 		if (check == NULL)
-			break;
-		if (check[0] == '\n') 
-			return (free(check),-1);
+			break ;
+		if (check[0] == '\n')
+			return (free(check), -1);
 		count++;
 		free(check);
 	}
@@ -56,18 +57,17 @@ int	check_column(const char *filename)
 
 char	**malloc_map(const char *filename, int x, int column, char **map)
 {
-	int i;
-	int y;
-	int fd;
-	char *ref_line;
+	int		i;
+	int		y;
+	int		fd;
+	char	*ref_line;
 
 	i = 0;
 	y = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1 || !map)
 		return (NULL);
-
-	while(y < column)
+	while (y < column)
 	{
 		ref_line = get_next_line(fd);
 		if (column - 1 == y && ref_line[x] == '\n')
@@ -78,8 +78,7 @@ char	**malloc_map(const char *filename, int x, int column, char **map)
 		while (ref_line[i] != '\n' && ref_line[i] != '\0')
 			i++;
 		if (i != x)
-			return (close(fd), free_map(map , y), NULL);
-
+			return (close(fd), free_map(map, y), NULL);
 		map[y] = ft_substr(ref_line, 0, x + 1);
 		free(ref_line);
 		if (!map[y])

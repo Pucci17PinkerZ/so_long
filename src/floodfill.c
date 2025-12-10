@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 // #include "so_long.h"
-// int	floodfill(t_game *game, int y, int x)//retourne 1 si la map est possible sinon 0
+// int	floodfill(t_game *game, int y, int x)
 // {
 // 	if(!game)
 // 		return (0);
