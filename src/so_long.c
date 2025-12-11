@@ -24,15 +24,17 @@ int	main(int argc, char **argv)
 	game.sprite.img_height = 64;
 	game.sprite.img_width = 64;
 	game.filename = argv[1];
-	new_map(&game);
+	if (new_map(&game))
+		return (printf("map pas ok\n"), 1);
 	if (check_map(&game))
 	{
-		printf("la map ne remplit pas les conditions :'(\n");
+		printf("la map pas ok:'(\n");
 		return (0);
 	}
 	copy_map(&game);
 	if (floodfill(&game, game.player_y, game.player_x))
-		return (printf("la map n'est pas réalisable\n"), 2);
-	printf("\nla map remplit toutes les conditions :)\n");
+		return (printf("impossible de finir\n"), 2);
+	printf("\nla map jouable :)\n");
 	mlx_windows_start(&game);
+	return (0);
 }

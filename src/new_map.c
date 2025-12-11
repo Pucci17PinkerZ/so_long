@@ -79,15 +79,15 @@ char	**malloc_map(const char *filename, int x, int column, char **map)
 		if (ref_line == NULL)
 			break ;
 		i = 0;
-		while (ref_line[i] != '\n' && ref_line[i] != '\0')
+		while (ref_line[i] && ref_line[i] != '\n')
 			i++;
 		printf("i == %d\n", i);
 		if (i != x)
-			return (close(fd), free_map(map, y), NULL);
-		map[y] = ft_substr(ref_line, 0, x + 1);
+			return (printf("map freed\n"), close(fd), free_map(map, y), NULL);
+		map[y] = ft_substr(ref_line, 0, x);
 		free(ref_line);
 		if (!map[y])
-			return (close(fd), free_map(map, y), NULL);
+			return (printf("map freed\n"), close(fd), free_map(map, y), NULL);
 		y++;
 	}
 	close(fd);

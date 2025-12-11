@@ -34,8 +34,8 @@ int	floodfill(t_game *game, int y, int x)
 	floodfill(game, y, x - 1);
 	floodfill(game, y - 1, x);
 	if (game->map.coins_found_two == game->map.coins_count
-	&& game->map.exit_count)
-			return (0);
+		&& game->map.exit_count)
+		return (0);
 	return (1);
 }
 
