@@ -27,15 +27,3 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-// #include <stdio.h>
-// int main (void)
-// {
-//     char tab[5] = "abcde";
-//     char tab2[6] = "IIIIII";
-//     printf("%s\n", (char *)ft_memcpy(tab, tab2, 0));
-//     printf("%s\n", (char *)ft_memcpy(tab, tab2, 5));
-//     // printf("tab %c\n", tab[17]);
-//     // printf("tab2 %c\n", tab2[17]);
-//     // printf("tab %c\n", tab[18]);
-//     // printf("tab2 %c\n", tab2[18]);
-// }

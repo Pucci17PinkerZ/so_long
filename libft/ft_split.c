@@ -100,20 +100,3 @@ char	**ft_split(char const *s, char c)
 	return ((char **)tab);
 }
 
-// int	main (void)
-// {
-// 	// char tab[100] = "\0lol\0lil\0lul\0";
-// 	// char **swo;
-// 	// int i = 0;
-// 	// swo = ft_split(tab, '\0');
-// 	// (void)swo;
-// 	// (void)tab;
-// 	// if (!swo || swo[1] == 0)
-// 	// printf("swo est vide\n");
-// 	// printf("%ld", ft_count_words("hello", ' '));
-// 	// for (i = 0; swo[i]; i++)
-// 	// 	printf("%s\n", swo[i]);
-// 	// printf("%s\n", swo[1]);
-// 	// printf("%p\n", &swo[0][1]);
-// 	// ft_split("hello!", ' ');
-// }

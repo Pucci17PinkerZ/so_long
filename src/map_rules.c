@@ -56,11 +56,11 @@ int	scan_map(char c, int x, int y, t_game *game)
 int	count_item(t_game *game)
 {
 	if (game->map.player_count != 1)
-		return (-1);
+		return (printf("1\n"), -1);
 	if (game->map.exit_count != 1)
-		return (-1);
+		return (printf("2\n"), -1);
 	if (game->map.coins_count <= 0)
-		return (-1);
+		return (printf("3\n"), -1);
 	return (0);
 }
 
@@ -82,6 +82,6 @@ int	check_map(t_game *game)
 		y++;
 	}
 	if (count_item(game))
-		return (-1);
+		return (printf("je suis ici\n"), -1);
 	return (0);
 }

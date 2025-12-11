@@ -36,8 +36,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	}
 	return (str[i] = 0, str);
 }
-// int main (void)
-// {
-// 	char tab[] = "abcdefg";
-// 	printf("%s",ft_strmapi(tab, ft_toupperr));
-// }

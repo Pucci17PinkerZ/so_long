@@ -38,10 +38,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	return (sub);
 }
-
-// #include <stdio.h>
-// int main (void)
-// {
-// 	char * s = ft_substr("tripouille", 0, 42000);
-//     printf("string de base : %s,\nsub:%s", "tripouille", s);
-// }

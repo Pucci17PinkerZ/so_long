@@ -32,10 +32,3 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (0);
 }
-// #include <stdio.h>
-// int main (void)
-// {
-// 	char little[] = "";
-// 	char big[] = "";
-// 	printf("%s",ft_strnstr(big, little, 0));
-// }

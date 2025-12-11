@@ -63,7 +63,6 @@ int	update_movement(int keycode, t_game *game)
 
 int	mlx_hookloop(t_game *game)
 {
-	printf("Initialisation des hooks...\n");
 	mlx_hook(game->mlx.win_ptr, 17, 0, close_window, game);
 	mlx_hook(game->mlx.win_ptr, 2, 1L << 0, update_movement, game);
 	mlx_loop(game->mlx.mlx_ptr);

@@ -24,9 +24,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 		i--;
 	return (ft_substr(s1, 0, i + 1));
 }
-// int main (void)
-// {
-// 	char s1[100] = "1";
-// 	char s2[100] = "";
-// 	printf("%s",ft_strtrim(s1, s2));
-// }

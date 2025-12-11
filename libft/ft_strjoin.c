@@ -24,10 +24,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_strlcat(str, s2, len + 1);
 	return (str);
 }
-// #include <stdio.h>
-// int main (void)
-// {
-//     char tab1[100] = "";
-//     char tab2[100] = "";
-//     printf("jointee la string : %s\n", ft_strjoin(tab1, tab2));
-// }

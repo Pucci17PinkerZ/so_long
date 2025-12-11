@@ -23,7 +23,7 @@ int	check_length(const char *filename)
 	if (fd == -1)
 		return (-1);
 	ref_line = get_next_line(fd);
-	if (ref_line == NULL)
+	if (ref_line == NULL || ref_line[1] == '\0')
 		return (-1);
 	while (ref_line[i] != '\n')
 		i++;
@@ -52,6 +52,8 @@ int	check_column(const char *filename)
 		free(check);
 	}
 	close(fd);
+	if (count == 1)
+		return (-1);
 	return (count);
 }
 
@@ -69,14 +71,17 @@ char	**malloc_map(const char *filename, int x, int column, char **map)
 		return (NULL);
 	while (y < column)
 	{
+		printf("je bloque à %d\n", y);
 		ref_line = get_next_line(fd);
 		if (column - 1 == y && ref_line[x] == '\n')
 			return (NULL);
+		printf("ici je passe\n");
 		if (ref_line == NULL)
 			break ;
 		i = 0;
 		while (ref_line[i] != '\n' && ref_line[i] != '\0')
 			i++;
+		printf("i == %d\n", i);
 		if (i != x)
 			return (close(fd), free_map(map, y), NULL);
 		map[y] = ft_substr(ref_line, 0, x + 1);
@@ -104,6 +109,8 @@ int	new_map(t_game *game)
 		return (-1);
 	game->map.column = y;
 	game->map.length = x;
+	printf("x == %d\n", x);
+	printf("y == %d\n", y);
 	game->map.map = malloc(sizeof(char *) * (y + 1));
 	if (!game->map.map)
 		return (-1);

@@ -30,15 +30,3 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
-// #include <stdio.h>
-// int main (void)
-// {
-//     char tab[100] = "la fondue est cool";
-//     char tab2[100] = "la fondue est cooll";
-//     printf("%d\n", ft_memcmp(tab, tab2, 20));
-//     printf("%d\n", ft_memcmp(tab, tab2, 18));
-//     printf("tab %c\n", tab[17]);
-//     printf("tab2 %c\n", tab2[17]);
-//     printf("tab %c\n", tab[18]);
-//     printf("tab2 %c\n", tab2[18]);
-// }

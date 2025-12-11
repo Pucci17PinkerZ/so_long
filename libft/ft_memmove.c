@@ -31,14 +31,3 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-
-// #include <stdio.h>
-// #include <string.h>
-// int main(void)
-// {
-// 	char src1[] = "12345678";
-// 	printf("%s\n",(char *)ft_memmove(src1 +3, src1 , 5));
-// 	char src2[] = "12345678";
-// 	printf("%s",(char *)memmove(src2 +3, src2 , 5));
-// 	return (0);
-// }

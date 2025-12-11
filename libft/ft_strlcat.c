@@ -30,10 +30,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	dst[dst_len + i] = '\0';
 	return (dst_len + src_len);
 }
-
-// int main (void)
-// {
-// 	char src[100] = "bgtrj";
-// 	char dst[100] = "au5r7i";
-// 	printf("RV :%ld", ft_strlcat(dst, src, 100));
-// }

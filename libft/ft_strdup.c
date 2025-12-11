@@ -29,10 +29,3 @@ char	*ft_strdup(const char *s)
 	}
 	return (dup[len] = '\0', (char *)dup);
 }
-// int main (void)
-// {
-//     char tab[100] = "la fondue est cool";
-//     char tab2[100] = "";
-//     printf("phrase d'origine :%s\n%s\n",tab, ft_strdup(tab));
-//     printf("phrase d'origine :%s\n%s\n",tab2, ft_strdup(tab2));
-// }

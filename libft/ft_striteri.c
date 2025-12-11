@@ -29,10 +29,3 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 	}
 	return ;
 }
-
-// int main (void)
-// {
-// 	char	tab[] = "QWERTYUIOP\nasdfghjkl\nZXCVBNM";
-// 	ft_striteri(tab, f);
-// 	printf("%s", tab);
-// }

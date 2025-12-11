@@ -24,10 +24,3 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	return (NULL);
 }
-// #include <stdio.h>
-// int main (void)
-// {
-// 	char tab1[100] = "ok ooooooobro !";
-// 	printf("%s",ft_strrchr(tab1, 'f'+ 256));
-// 	// ft_strrchr(s, 't' );
-// } 

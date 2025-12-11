@@ -17,11 +17,3 @@ int	ft_isalnum(int c)
 		|| (c >= 'A' && c <= 'Z')
 		|| (c >= 'a' && c <= 'z'));
 }
-
-// #include <stdio.h>
-// int main (void)
-// {
-//     printf("%d\n",ft_isalnum(40));
-//      printf("%d\n",ft_isalnum('Z'));
-//       printf("%d\n",ft_isalnum('9'));
-// }

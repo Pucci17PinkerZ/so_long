@@ -15,10 +15,3 @@ int	ft_isascii(int c)
 {
 	return (c >= 0 && c <= 127);
 }
-// #include <stdio.h>
-// int main (void)
-// {
-//     printf("%d\n",ft_isascii(127));
-//      printf("%d\n",ft_isascii('Z'));
-//       printf("%d\n",ft_isascii('~'));
-// }

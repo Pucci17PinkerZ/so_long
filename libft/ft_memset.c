@@ -23,11 +23,3 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
-// #include <stdio.h>
-// int main (void)
-// {
-// 	char tab[30] = "la fondue est cool";
-// 	printf("%s\n", (unsigned char *)ft_memset(tab, 'A', 1023));
-// 	// printf("%s", tab[14]);
-// 	// printf("%p\n%c", &tab[16], tab[17]);
-// }

@@ -37,9 +37,3 @@ int	ft_atoi(const char *nptr)
 	}
 	return (res * sign);
 }
-// #include <stdio.h>
-// int main (void)
-// {
-// 	int zo = ft_atoi("--1");
-// 	printf("%d", zo);
-// }

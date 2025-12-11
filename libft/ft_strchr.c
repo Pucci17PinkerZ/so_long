@@ -28,9 +28,3 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)&str[i]);
 	return (NULL);
 }
-//   #include <stdio.h>
-//    int main (void)
-//    {
-// 	 char tab1[100] = "ok bro !";
-// 	  printf("%s",ft_strchr(tab1, 'r'));
-//    }

@@ -20,8 +20,3 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-// #include <stdio.h>
-// int main (void)
-// {
-//     printf("%ld", ft_strlen("1000"));
-// }

@@ -34,9 +34,9 @@ int	floodfill(t_game *game, int y, int x)
 	floodfill(game, y, x - 1);
 	floodfill(game, y - 1, x);
 	if (game->map.coins_found_two == game->map.coins_count
-		&& game->map.exit_count)
+	&& game->map.exit_count)
 			return (0);
-	return (0);
+	return (1);
 }
 
 int	copy_map(t_game *game)
@@ -59,8 +59,5 @@ int	copy_map(t_game *game)
 		i++;
 	}
 	game->map.copy_map[i] = NULL;
-	printf("\nadress de l'ancienne  map %p\n", game->map.map);
-	printf("\nadresse de l'ancienne map %p\n", game->map.copy_map);
-	printf("\n i == %d\n", i);
 	return (0);
 }
