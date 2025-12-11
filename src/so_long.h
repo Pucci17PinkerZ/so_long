@@ -90,6 +90,7 @@ int		scan_map(char c, int x, int y, t_game *game);
 int		count_item(t_game *game);
 int		check_map(t_game *game);
 int		floodfill(t_game *game, int y, int x);
+int		copy_map(t_game *game);
 int		load_sprite(t_game *game);
 int		mlx_windows_start(t_game *game);
 int		mlx_hookloop(t_game *game);

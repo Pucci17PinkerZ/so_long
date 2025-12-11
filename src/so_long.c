@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 	{
-		printf("utilisation\n|----> ./so_long <map.ber>\n");
+		printf("utilisation---->  ./so_long <map.ber>\n");
 		return (0);
 	}
 	init_game(&game);
@@ -27,9 +27,12 @@ int	main(int argc, char **argv)
 	new_map(&game);
 	if (check_map(&game))
 	{
-		printf("la map ne remplit pas les conditions :'(");
+		printf("la map ne remplit pas les conditions :'(\n");
 		return (0);
 	}
-	printf("\nla map remplit les conditions :)\n");
+	copy_map(&game);
+	if (floodfill(&game, game.player_y, game.player_x))
+		return (printf("la map n'est pas réalisable\n"), 2);
+	printf("\nla map remplit toutes les conditions :)\n");
 	mlx_windows_start(&game);
 }

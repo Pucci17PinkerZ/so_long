@@ -31,17 +31,17 @@ int	scan_map(char c, int x, int y, t_game *game)
 	if (y == 0 || y == game->map.column - 1)
 	{
 		if (c != '1')
-			return (printf("JE PASSE PAR --LA CONDITION DU TOP ET DOWN\n"), -1);
+			return (printf("ERREUR TOP ET DOWN\n"), -1);
 	}
 	else if (x == 0 || x == game->map.length - 1)
 	{
 		if (c != '1')
-			return (printf("JE PASSE PAR --LA CONDITION DES COLONNES\n"), -1);
+			return (printf("ERREUR DES COLONNES\n"), -1);
 	}
 	else
 	{
 		if (scan_item(c, game))
-			return (printf("JE PASSE PAR --SCAN ITEM\n"), -1);
+			return (printf("ERREUR SCAN ITEM\n"), -1);
 		if (game->map.map[y][x] == 'P')
 			set_player(game, x, y);
 	}
