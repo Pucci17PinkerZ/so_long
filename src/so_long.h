@@ -36,7 +36,9 @@ typedef struct s_map
 	int		player_count;
 	int		exit_count;
 	int		coins_found;
-
+	char	**copy_map;
+	int		coins_found_two;
+	int		exit_found;
 }	t_map;
 
 typedef struct s_mlx

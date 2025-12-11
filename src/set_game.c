@@ -61,6 +61,8 @@ void	init_map(t_map *map)
 	map->player_count = 0;
 	map->exit_count = 0;
 	map->coins_found = 0;
+	map->coins_found_two = 0;
+	map->exit_found = 0;
 }
 
 void	set_player(t_game *game, int x, int y)
