@@ -53,7 +53,7 @@ int	copy_map(t_game *game)
 		if (!game->map.copy_map[i])
 		{
 			free_map(game->map.copy_map, i);
-			free_map(game->map.map, i);
+			free_map(game->map.map, game->map.column);
 			return (1);
 		}
 		i++;

@@ -21,20 +21,29 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	init_game(&game);
-	game.sprite.img_height = 64;
-	game.sprite.img_width = 64;
 	game.filename = argv[1];
 	if (new_map(&game))
 		return (printf("map pas ok\n"), 1);
 	if (check_map(&game))
 	{
-		printf("la map pas ok:'(\n");
-		return (0);
+		printf("la map pas ok :(\n");
+		return (free_map(game.map.map, game.map.column), 1);
 	}
-	copy_map(&game);
+	if (copy_map(&game))
+		return (1);
 	if (floodfill(&game, game.player_y, game.player_x))
+	{
+		free_map(game.map.copy_map, game.map.column);
+		free_map(game.map.map, game.map.column);
 		return (printf("impossible de finir\n"), 2);
-	printf("\nla map jouable :)\n");
-	mlx_windows_start(&game);
+	}
+	printf("\nla map est jouable :)\n");
+	
+	if (mlx_windows_start(&game))
+	{
+		free_map(game.map.map, game.map.column);
+		return (1);
+	}
+		
 	return (0);
 }

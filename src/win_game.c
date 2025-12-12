@@ -25,6 +25,7 @@ void	all_coin_collected(t_game *game)
 	{
 		printf("you won!\n");
 		close_window(game);
+		printf("valeur du pointeur");
 		exit (0);
 	}
 }

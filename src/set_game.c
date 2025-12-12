@@ -36,8 +36,8 @@ void	init_sprite(t_sprite *sprite)
 	sprite->img_coin = NULL;
 	sprite->img_player = NULL;
 	sprite->img_exit = NULL;
-	sprite->img_width = 0;
-	sprite->img_height = 0;
+	sprite->img_width = 128;
+	sprite->img_height = 128;
 }
 
 void	init_mlx(t_mlx *mlx)

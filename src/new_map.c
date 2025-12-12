@@ -67,21 +67,21 @@ char	**malloc_map(const char *filename, int x, int column, char **map)
 	i = 0;
 	y = 0;
 	fd = open(filename, O_RDONLY);
-	if (fd == -1 || !map)
-		return (NULL);
+	if (fd == -1)
+		return (free(map), NULL);
+	if (!map)
+		close(fd);
 	while (y < column)
 	{
-		printf("je bloque à %d\n", y);
 		ref_line = get_next_line(fd);
 		if (column - 1 == y && ref_line[x] == '\n')
-			return (NULL);
-		printf("ici je passe\n");
+			return (NULL);//
 		if (ref_line == NULL)
-			break ;
+			break ;//	
+
 		i = 0;
 		while (ref_line[i] && ref_line[i] != '\n')
 			i++;
-		printf("i == %d\n", i);
 		if (i != x)
 			return (printf("map freed\n"), close(fd), free_map(map, y), NULL);
 		map[y] = ft_substr(ref_line, 0, x);
@@ -91,7 +91,7 @@ char	**malloc_map(const char *filename, int x, int column, char **map)
 		y++;
 	}
 	close(fd);
-	return (map);
+	return (map);//
 }
 
 int	new_map(t_game *game)
