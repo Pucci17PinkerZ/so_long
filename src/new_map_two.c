@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-int	malloc_map_two(t_game *game, char **map, int y, int fd)
+int	malloc_map_two(t_game *game, int y, int fd)
 {
 	int		i;
 	char	*ref_line;
@@ -29,12 +29,12 @@ int	malloc_map_two(t_game *game, char **map, int y, int fd)
 	if (i != game->map.length)
 		return (free(ref_line), ft_printf("map freed\n"),
 			close(fd), 1);
-	map[y] = ft_substr(ref_line, 0, game->map.length);
+	game->map.map[y] = ft_substr(ref_line, 0, game->map.length);
 	free(ref_line);
 	return (0);
 }
 
-char	**malloc_map(t_game *game, int column, char **map)
+char	**malloc_map(t_game *game, int column)
 {
 	int		y;
 	int		fd;
@@ -42,17 +42,17 @@ char	**malloc_map(t_game *game, int column, char **map)
 	y = 0;
 	fd = open(game->filename, O_RDONLY);
 	if (fd == -1)
-		return (free(map), NULL);
-	if (!map)
+		return (free(game->map.map), NULL);
+	if (!game->map.map)
 		close(fd);
 	while (y < column)
 	{
-		malloc_map_two(game, map, y, fd);
-		if (!map[y])
+		
+		if (malloc_map_two(game, y, fd))/* !game->map.map[y] */
 			return (ft_printf("map freed\n"),
-				close(fd), free_map(map, y), NULL);
+				close(fd), free_map(game->map.map, y), NULL);
 		y++;
 	}
 	close(fd);
-	return (map);
+	return (game->map.map);
 }

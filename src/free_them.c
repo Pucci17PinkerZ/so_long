@@ -17,7 +17,6 @@ void	free_map(char **map, int y)
 	while (y > 0)
 		free(map[--y]);
 	free(map);
-	map = NULL;
 	return ;
 }
 

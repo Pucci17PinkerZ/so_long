@@ -76,7 +76,7 @@ int	new_map(t_game *game)
 	game->map.map = malloc(sizeof(char *) * (y + 1));
 	if (!game->map.map)
 		return (-1);
-	if (malloc_map(game, y, game->map.map) == NULL)
+	if (malloc_map(game, y) == NULL)
 		return (-1);
 	return (0);
 }

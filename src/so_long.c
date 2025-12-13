@@ -16,13 +16,13 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	if (argc == 1)
-	{
-		ft_printf("use it that way---->  ./so_long <map.ber>\n");
-		return (0);
-	}
+		return (ft_printf("use it that way---->"  
+				"./so_long <map.ber>\n"), 0);
 	init_game(&game);
 	game.filename = argv[1];
-	if (new_map(&game) || check_ber(&game))
+	if (check_ber(&game))
+		return (1);
+	if (new_map(&game))
 		return (ft_printf("map not ok\n"), 1);
 	if (check_gameplay(&game))
 		return (1);
