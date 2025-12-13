@@ -42,8 +42,10 @@ int	check_ber(t_game *game)
 	i = strlen(game->filename);
 	if (i < 3)
 		return (1);
-	if (ft_strncmp(game->filename[i - 3], ".ber", 3))
+	printf("\n---%s----\n",&game->filename[i - 4]);
+	if (ft_strncmp(&game->filename[i - 4], ".ber", 4))
 		return (ft_printf(".ber pls\n"), 1);
+	return (0);
 }
 
 int	check_gameplay(t_game *game)
