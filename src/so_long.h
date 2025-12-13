@@ -78,6 +78,7 @@ typedef struct s_game
 int		check_gameplay(t_game *game);
 int		*read_map(const char *filename, t_game *game);
 int		new_map(t_game *game);
+int		check_ber(t_game *game);
 char	**malloc_map(t_game *game, int column, char **map);
 int		malloc_map_two(t_game *game, char **map, int y, int fd);
 int		check_column(const char *filename);

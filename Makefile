@@ -3,12 +3,15 @@ NAME = so_long
 DIRGNL = gnl
 DIRSRC = src
 DIRLIBFT = libft
-LIBFT_LIB = $(DIRLIBFT)/libft.a
 DIRMLX = mlx
-MLX_LIB = $(DIRMLX)/libmlx.a
 DIRPRINTF = ft_printf
+LIBFT_LIB = $(DIRLIBFT)/libft.a
+MLX_LIB = $(DIRMLX)/libmlx.a
 PRINTF_LIB = $(DIRPRINTF)/libftprintf.a
 CFLAGS = -Wall -Wextra -Werror -g
+INCLUDES = -I/usr/include -I$(DIRMLX) -I$(DIRLIBFT) -I$(DIRPRINTF) -I$(DIRSRC) -I$(DIRGNL)
+LDFLAGS = -L$(DIRMLX) -lmlx -lXext -lX11
+RM = rm -rf
 
 SRC = $(DIRSRC)/so_long.c \
 	$(DIRSRC)/new_map.c\
@@ -24,50 +27,36 @@ SRC = $(DIRSRC)/so_long.c \
 	$(DIRGNL)/get_next_line_utils.c \
 
 OBJ = $(SRC:.c=.o)
-LDFLAGS = -L$(DIRMLX) -lmlx -lXext -lX11
-RM = rm -rf
-
-
-NB := $(words $(SRC))
-BARLEN = 30
 
 %.o: %.c
-	@$(eval CNT := $(shell ls $(DIRSRC)/*.o $(DIRGNL)/*.o $(DIRLIBFT)/*.o $(DIRPRINTF)/*.o 2>/dev/null | wc -l))
-	@$(eval PROG := $(shell echo $$(($(CNT) * 100 / $(NB))) ))
-	@$(eval FILLED := $(shell echo $$(($(PROG) * $(BARLEN) / 100)) ))
-	@$(eval EMPTY := $(shell echo $$(($(BARLEN) - $(FILLED))) ))
-
-	@printf "\r\033[35m[%s%s] %3s%%\033[0m  \033[90m(%s)\033[0m" \
-		$$(printf '#%.0s' $$(seq 1 $(FILLED))) \
-		$$(printf '.%.0s' $$(seq 1 $(EMPTY))) \
-		"$(PROG)" "$<"
-
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 all: $(LIBFT_LIB) $(PRINTF_LIB) $(MLX_LIB) $(NAME)
 
 $(MLX_LIB):
-	$(MAKE) -C $(DIRMLX)
+	@make -C $(DIRMLX)
 
 $(PRINTF_LIB):
-	$(MAKE) -C $(DIRPRINTF)
+	@make -C $(DIRPRINTF)
 
 $(LIBFT_LIB):
-	$(MAKE) -C $(DIRLIBFT)
+	@make -C $(DIRLIBFT)
 
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(MLX_LIB) $(PRINTF_LIB) $(LIBFT_LIB) $(LDFLAGS) $(CFLAGS) -o $(NAME)
 
 clean:
-	rm -f $(OBJ)
-	@make clean -C ./libft
-	@make clean -C ./ft_printf
+	$(RM) $(OBJ)
+	@make clean -C $(DIRLIBFT)
+	@make clean -C $(DIRPRINTF)
+	@make clean -C $(DIRMLX)
 
 fclean: clean
-	rm -f $(NAME)
-	rm -f libft.a
-	@make fclean -C ./libft
-	@make fclean -C ./ft_printf
+	$(RM) $(NAME)
+	$(RM) libft.a
+	@make fclean -C $(DIRLIBFT)
+	@make fclean -C $(DIRPRINTF)
+
 re: fclean all
 
 .PHONY: all clean fclean re

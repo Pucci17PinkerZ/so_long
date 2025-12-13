@@ -82,6 +82,6 @@ int	check_map(t_game *game)
 		y++;
 	}
 	if (count_item(game))
-		return (ft_printf("je suis ici\n"), -1);
+		return (ft_printf("count_item not ok\n"), -1);
 	return (0);
 }

@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	}
 	init_game(&game);
 	game.filename = argv[1];
-	if (new_map(&game))
+	if (new_map(&game) || check_ber(&game))
 		return (ft_printf("map not ok\n"), 1);
 	if (check_gameplay(&game))
 		return (1);
@@ -33,6 +33,17 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	return (0);
+}
+
+int	check_ber(t_game *game)
+{
+	int	i;
+
+	i = strlen(game->filename);
+	if (i < 3)
+		return (1);
+	if (ft_strncmp(game->filename[i - 3], ".ber", 3))
+		return (ft_printf(".ber pls\n"), 1);
 }
 
 int	check_gameplay(t_game *game)
