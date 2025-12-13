@@ -101,5 +101,6 @@ void	set_game(t_game *game, char *filename);
 void	free_map(char **map, int y);
 void	set_free(t_game *game);
 void	all_coin_collected(t_game *game);
+void	free_img_ptr(t_game *game);
 
 #endif

@@ -21,8 +21,12 @@ void	free_map(char **map, int y)
 	return ;
 }
 
-// void clean_exit(t_game *game)
-// {
-// 	if (game->map.map)
-
-// }
+void	free_img_ptr(t_game *game)
+{
+	mlx_destroy_image(game->mlx.mlx_ptr,game->sprite.img_coin);
+	mlx_destroy_image(game->mlx.mlx_ptr,game->sprite.img_exit);
+	mlx_destroy_image(game->mlx.mlx_ptr,game->sprite.img_floor);
+	mlx_destroy_image(game->mlx.mlx_ptr,game->sprite.img_wall);
+	mlx_destroy_image(game->mlx.mlx_ptr,game->sprite.img_player);
+	return ;
+}

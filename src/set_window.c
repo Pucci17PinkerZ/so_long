@@ -14,7 +14,13 @@
 
 int	close_window(t_game *game)
 {
+	free_map(game->map.map, game->map.column);
+	free_img_ptr(game);
 	mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
+	mlx_destroy_display(game->mlx.mlx_ptr);
+	free(game->mlx.mlx_ptr);
+	game->mlx.mlx_ptr = NULL;
+	init_game(game);
 	exit (0);
 	return (0);
 }

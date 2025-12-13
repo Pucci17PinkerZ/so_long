@@ -17,27 +17,30 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 	{
-		printf("utilisation---->  ./so_long <map.ber>\n");
+		printf("use it that way---->  ./so_long <map.ber>\n");
 		return (0);
 	}
 	init_game(&game);
 	game.filename = argv[1];
 	if (new_map(&game))
-		return (printf("map pas ok\n"), 1);
+		return (printf("map not ok\n"), 1);
 	if (check_map(&game))
 	{
-		printf("la map pas ok :(\n");
+		printf("map not ok :(\n");
 		return (free_map(game.map.map, game.map.column), 1);
 	}
-	if (copy_map(&game))
-		return (1);
-	if (floodfill(&game, game.player_y, game.player_x))
+	// if ()
+	// 	return (1);
+	if ( copy_map(&game) || floodfill(&game, game.player_y, game.player_x) )
 	{
 		free_map(game.map.copy_map, game.map.column);
 		free_map(game.map.map, game.map.column);
-		return (printf("impossible de finir\n"), 2);
+		init_game(&game);
+		return (printf("end impossible\n"), 2);
 	}
-	printf("\nla map est jouable :)\n");
+	free_map(game.map.copy_map, game.map.column);
+	game.map.copy_map = NULL;
+	printf("\nmap is playable :)\n");
 	
 	if (mlx_windows_start(&game))
 	{

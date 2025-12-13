@@ -21,7 +21,6 @@ void	init_game(t_game *game)
 	init_mlx(&game->mlx);
 	game->player_y = 0;
 	game->player_x = 0;
-	ft_bzero(game->key_pressed, sizeof(game->key_pressed));
 	game->keycode = 0;
 	game->hidden_door_x = 0;
 	game->hidden_door_y = 0;
@@ -63,6 +62,7 @@ void	init_map(t_map *map)
 	map->coins_found = 0;
 	map->coins_found_two = 0;
 	map->exit_found = 0;
+	map->copy_map = NULL;
 }
 
 void	set_player(t_game *game, int x, int y)

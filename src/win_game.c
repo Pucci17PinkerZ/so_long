@@ -25,7 +25,7 @@ void	all_coin_collected(t_game *game)
 	{
 		printf("you won!\n");
 		close_window(game);
-		printf("valeur du pointeur");
-		exit (0);
+		printf("------valeur du pointeur------\nmlx_ptr == %p\nwin_ptr == %p\n",game->mlx.mlx_ptr, game->mlx.win_ptr);
+		// exit (0);
 	}
 }
