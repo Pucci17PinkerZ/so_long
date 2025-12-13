@@ -21,10 +21,12 @@ int	check_length(const char *filename)
 	i = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (-1);
+		return (close(fd), -1);
 	ref_line = get_next_line(fd);
-	if (ref_line == NULL || ref_line[1] == '\0')
+	if (ref_line == NULL)
 		return (-1);
+	if (ref_line[1] == '\0')
+		return (free(ref_line), close(fd), -1);
 	while (ref_line[i] != '\n')
 		i++;
 	close(fd);
@@ -47,7 +49,7 @@ int	check_column(const char *filename)
 		if (check == NULL)
 			break ;
 		if (check[0] == '\n')
-			return (free(check), -1);
+			return (free(check), close(fd), -1);
 		count++;
 		free(check);
 	}
@@ -75,10 +77,9 @@ char	**malloc_map(const char *filename, int x, int column, char **map)
 	{
 		ref_line = get_next_line(fd);
 		if (column - 1 == y && ref_line[x] == '\n')
-			return (NULL);//
+			return (close(fd), NULL);
 		if (ref_line == NULL)
-			break ;//	
-
+			break ;
 		i = 0;
 		while (ref_line[i] && ref_line[i] != '\n')
 			i++;
@@ -91,7 +92,7 @@ char	**malloc_map(const char *filename, int x, int column, char **map)
 		y++;
 	}
 	close(fd);
-	return (map);//
+	return (map);
 }
 
 int	new_map(t_game *game)
