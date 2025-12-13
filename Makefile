@@ -37,22 +37,17 @@ BARLEN = 30
 	@$(eval FILLED := $(shell echo $$(($(PROG) * $(BARLEN) / 100)) ))
 	@$(eval EMPTY := $(shell echo $$(($(BARLEN) - $(FILLED))) ))
 
-	ft_printf("  ____               _                   \n");
-	ft_printf(" / ___|   ___       | |   ___    _ __    __ _ \n");
-	ft_printf(" \\___ \\  / _ \\      | |  / _ \\  | '_ \\  / _` |\n");
-	ft_printf("  ___) | | (_) |     | | | (_) | | | | | | (_| |\n");
-	ft_printf(" |____/   \\___/      |_|  \\___/  |_| |_|  \\__, |\n");
-	ft_printf("                                          |___/ \n");
-	ft_printf("\n");
+	@printf "\r\033[35m[%s%s] %3s%%\033[0m  \033[90m(%s)\033[0m" \
+		$$(printf '#%.0s' $$(seq 1 $(FILLED))) \
+		$$(printf '.%.0s' $$(seq 1 $(EMPTY))) \
+		"$(PROG)" "$<"
 
 	@$(CC) $(CFLAGS) -c $< -o $@
-
-# --------------------------------------------------------
 
 all: $(LIBFT_LIB) $(PRINTF_LIB) $(MLX_LIB) $(NAME)
 
 $(MLX_LIB):
-	$(MAKE) -C $(DIRMLX) --no-print-directory > /dev/null
+	$(MAKE) -C $(DIRMLX)
 
 $(PRINTF_LIB):
 	$(MAKE) -C $(DIRPRINTF)
@@ -64,17 +59,15 @@ $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(MLX_LIB) $(PRINTF_LIB) $(LIBFT_LIB) $(LDFLAGS) $(CFLAGS) -o $(NAME)
 
 clean:
-	$(RM) $(OBJ)
-	$(MAKE) -C $(DIRMLX) clean --no-print-directory > /dev/null
-	$(MAKE) -C $(DIRPRINTF) clean --no-print-directory > /dev/null
-	$(MAKE) -C $(DIRLIBFT) clean --no-print-directory > /dev/null
+	rm -f $(OBJ)
+	@make clean -C ./libft
+	@make clean -C ./ft_printf
 
 fclean: clean
-	$(RM) $(NAME)
-	$(MAKE) -C $(DIRMLX) clean --no-print-directory > /dev/null
-	$(MAKE) -C $(DIRPRINTF) clean --no-print-directory > /dev/null
-	$(MAKE) -C $(DIRLIBFT) clean --no-print-directory > /dev/null
-
+	rm -f $(NAME)
+	rm -f libft.a
+	@make fclean -C ./libft
+	@make fclean -C ./ft_printf
 re: fclean all
 
 .PHONY: all clean fclean re
