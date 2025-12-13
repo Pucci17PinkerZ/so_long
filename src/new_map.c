@@ -27,10 +27,9 @@ int	check_length(const char *filename)
 		return (-1);
 	if (ref_line[1] == '\0')
 		return (free(ref_line), close(fd), -1);
-	while (ref_line[i] != '\n')
+	while (ref_line[i] != '\n' && ref_line[i])
 		i++;
-	close(fd);
-	return (free(ref_line), i);
+	return (close(fd), free(ref_line), i);
 }
 
 int	check_column(const char *filename)

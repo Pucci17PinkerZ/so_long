@@ -42,7 +42,6 @@ int	check_ber(t_game *game)
 	i = strlen(game->filename);
 	if (i < 3)
 		return (1);
-	printf("\n---%s----\n",&game->filename[i - 4]);
 	if (ft_strncmp(&game->filename[i - 4], ".ber", 4))
 		return (ft_printf(".ber pls\n"), 1);
 	return (0);

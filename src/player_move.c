@@ -47,8 +47,8 @@ void	move_player(t_game *game, int y, int x)
 		sprite_to_put(game, game->player_x, game->player_y);
 		game->player_mov++;
 	}
-	ft_printf("position du joueur et de map[%d][%d]\n",
-		game->player_y, game->player_x);
+	ft_printf("on map[%d][%d]\nmoves == %d\n",
+		game->player_y, game->player_x,game->player_mov);
 }
 
 int	update_movement(int keycode, t_game *game)

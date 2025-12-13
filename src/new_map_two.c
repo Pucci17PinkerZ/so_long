@@ -20,15 +20,15 @@ int	malloc_map_two(t_game *game, char **map, int y, int fd)
 	i = 0;
 	ref_line = get_next_line(fd);
 	if (game->map.column - 1 == y && ref_line[game->map.length] == '\n')
-		return (close(fd), 1);
+		return (close(fd), free(ref_line), 1);
 	if (!ref_line)
 		return (1);
 	i = 0;
 	while (ref_line[i] && ref_line[i] != '\n')
 		i++;
 	if (i != game->map.length)
-		return (ft_printf("map freed\n"),
-			close(fd), free_map(map, y), 1);
+		return (free(ref_line), ft_printf("map freed\n"),
+			close(fd), 1);
 	map[y] = ft_substr(ref_line, 0, game->map.length);
 	free(ref_line);
 	return (0);
