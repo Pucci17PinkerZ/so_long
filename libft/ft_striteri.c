@@ -10,13 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
-#include <stdio.h>
 
-// void	f(unsigned int i, char *str)
-// {
-// 	if ((i % 2) && (str[i] >= 'a' && str[i] <= 'z'))
-// 		str[i] -= 32;
-// }
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	int	i;

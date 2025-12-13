@@ -23,7 +23,7 @@ int	scan_item(char c, t_game *game)
 	if (c == '0' || c == '1')
 		return (0);
 	else
-		return (-1);//
+		return (-1);
 }
 
 int	scan_map(char c, int x, int y, t_game *game)
@@ -31,17 +31,17 @@ int	scan_map(char c, int x, int y, t_game *game)
 	if (y == 0 || y == game->map.column - 1)
 	{
 		if (c != '1')
-			return (printf("ERREUR TOP ET DOWN\n"), -1);//
+			return (ft_printf("ERROR TOP ET DOWN\n"), -1);
 	}
 	else if (x == 0 || x == game->map.length - 1)
 	{
 		if (c != '1')
-			return (printf("ERREUR DES COLONNES\n"), -1);//
+			return (ft_printf("ERROR COLUMN\n"), -1);
 	}
 	else
 	{
 		if (scan_item(c, game))
-			return (printf("ERREUR SCAN ITEM\n"), -1);//
+			return (ft_printf("ERROR SCAN ITEM\n"), -1);
 		if (game->map.map[y][x] == 'P')
 			set_player(game, x, y);
 	}
@@ -56,11 +56,11 @@ int	scan_map(char c, int x, int y, t_game *game)
 int	count_item(t_game *game)
 {
 	if (game->map.player_count != 1)
-		return (printf("1\n"), -1);//
+		return (-1);
 	if (game->map.exit_count != 1)
-		return (printf("2\n"), -1);//
+		return (-1);
 	if (game->map.coins_count <= 0)
-		return (printf("3\n"), -1);//
+		return (-1);
 	return (0);
 }
 
@@ -75,13 +75,13 @@ int	check_map(t_game *game)
 		x = 0;
 		while (x < game->map.length)
 		{
-			if (scan_map(game->map.map[y][x], x, y, game))//
+			if (scan_map(game->map.map[y][x], x, y, game))
 				return (-1);
 			x++;
 		}
 		y++;
 	}
-	if (count_item(game))//
-		return (printf("je suis ici\n"), -1);
+	if (count_item(game))
+		return (ft_printf("je suis ici\n"), -1);
 	return (0);
 }

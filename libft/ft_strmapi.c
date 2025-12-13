@@ -12,13 +12,6 @@
 #include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
-// char	ft_toupperr(unsigned int i, char c)
-// {
-// 	if (c >= 'a' && c <= 'z' &&(i % 2))
-// 		return (c - 32);
-// 	else
-// 		return (c);
-// }
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

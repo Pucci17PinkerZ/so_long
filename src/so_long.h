@@ -25,7 +25,7 @@
 # include "../gnl/get_next_line.h"
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
-// # include "../printf/ft_printf.h"
+# include "../ft_printf/ft_printf.h"
 
 typedef struct s_map
 {

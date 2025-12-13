@@ -23,18 +23,3 @@ void	ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
-// #include <stdio.h>
-// int main (void)
-// {
-// 	int i = 0;
-// 	char tab[100] = "hello word";
-
-// 	ft_bzero(tab, 5);
-// 	while (i < 10)
-// 	{
-// 		write(1, &tab[i], 1);
-// 		write(1, ".", 1);
-// 		i++;
-// 	}
-
-// }

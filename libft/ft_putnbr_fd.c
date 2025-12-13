@@ -36,18 +36,3 @@ void	ft_putnbr_fd(int n, int fd)
 	return ;
 }
 
-// int main (void)
-// {
-// 	ft_putnbr_fd(-0, 1);
-// 	ft_putchar_fd('\n', 1);
-// 		ft_putnbr_fd(-9, 1);
-// 		ft_putchar_fd('\n', 1);
-// 			ft_putnbr_fd(-10, 1);
-// 			ft_putchar_fd('\n', 1);
-// 				ft_putnbr_fd(-2147483648, 1);
-// 				ft_putchar_fd('\n', 1);
-// 					ft_putnbr_fd(2147483647, 1);
-// 					ft_putchar_fd('\n', 1);
-// 						ft_putnbr_fd(-9, 1);
-// 						ft_putchar_fd('\n', 1);
-// }

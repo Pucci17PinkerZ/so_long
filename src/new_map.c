@@ -83,11 +83,11 @@ char	**malloc_map(const char *filename, int x, int column, char **map)
 		while (ref_line[i] && ref_line[i] != '\n')
 			i++;
 		if (i != x)
-			return (printf("map freed\n"), close(fd), free_map(map, y), NULL);
+			return (ft_printf("map freed\n"), close(fd), free_map(map, y), NULL);
 		map[y] = ft_substr(ref_line, 0, x);
 		free(ref_line);
 		if (!map[y])
-			return (printf("map freed\n"), close(fd), free_map(map, y), NULL);
+			return (ft_printf("map freed\n"), close(fd), free_map(map, y), NULL);
 		y++;
 	}
 	close(fd);
@@ -109,8 +109,6 @@ int	new_map(t_game *game)
 		return (-1);
 	game->map.column = y;
 	game->map.length = x;
-	printf("x == %d\n", x);
-	printf("y == %d\n", y);
 	game->map.map = malloc(sizeof(char *) * (y + 1));
 	if (!game->map.map)
 		return (-1);
