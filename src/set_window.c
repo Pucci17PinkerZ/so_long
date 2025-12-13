@@ -49,8 +49,6 @@ void	move_player(t_game *game, int y, int x)
 	}
 	ft_printf("position du joueur et de map[%d][%d]\n",
 		game->player_y, game->player_x);
-			printf("******position du joueur et de map[%d][%d]\n",
-		game->player_y, game->player_x);
 }
 
 int	update_movement(int keycode, t_game *game)

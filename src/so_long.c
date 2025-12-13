@@ -24,26 +24,32 @@ int	main(int argc, char **argv)
 	game.filename = argv[1];
 	if (new_map(&game))
 		return (ft_printf("map not ok\n"), 1);
-	if (check_map(&game))
-	{
-		ft_printf("map not ok :(\n");
-		return (free_map(game.map.map, game.map.column), 1);
-	}
-	if (copy_map(&game) || floodfill(&game, game.player_y, game.player_x) )
-	{
-		free_map(game.map.copy_map, game.map.column);
-		free_map(game.map.map, game.map.column);
-		init_game(&game);
-		return (ft_printf("end impossible\n"), 2);
-	}
-	free_map(game.map.copy_map, game.map.column);
-	game.map.copy_map = NULL;
+	if (check_gameplay(&game))
+		return (1);
 	ft_printf("\nmap is playable :)\n");
-	
 	if (mlx_windows_start(&game))
 	{
 		free_map(game.map.map, game.map.column);
 		return (1);
 	}
+	return (0);
+}
+
+int	check_gameplay(t_game *game)
+{
+	if (check_map(game))
+	{
+		ft_printf("map not ok :(\n");
+		return (free_map(game->map.map, game->map.column), 1);
+	}
+	if (copy_map(game) || floodfill(game, game->player_y, game->player_x))
+	{
+		free_map(game->map.copy_map, game->map.column);
+		free_map(game->map.map, game->map.column);
+		init_game(game);
+		return (ft_printf("end impossible\n"), 1);
+	}
+	free_map(game->map.copy_map, game->map.column);
+	game->map.copy_map = NULL;
 	return (0);
 }

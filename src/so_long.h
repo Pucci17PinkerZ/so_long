@@ -75,9 +75,11 @@ typedef struct s_game
 	int			hidden_door_x;
 }	t_game;
 
+int		check_gameplay(t_game *game);
 int		*read_map(const char *filename, t_game *game);
 int		new_map(t_game *game);
-char	**malloc_map(const char *filename, int x, int column, char **map);
+char	**malloc_map(t_game *game, int column, char **map);
+int		malloc_map_two(t_game *game, char **map, int y, int fd);
 int		check_column(const char *filename);
 int		check_length(const char *filename);
 void	init_game(t_game *game);

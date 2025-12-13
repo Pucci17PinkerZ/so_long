@@ -12,6 +12,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = $(DIRSRC)/so_long.c \
 	$(DIRSRC)/new_map.c\
+	$(DIRSRC)/new_map_two.c\
 	$(DIRSRC)/player_move.c\
 	$(DIRSRC)/map_rules.c\
 	$(DIRSRC)/free_them.c\
@@ -36,10 +37,13 @@ BARLEN = 30
 	@$(eval FILLED := $(shell echo $$(($(PROG) * $(BARLEN) / 100)) ))
 	@$(eval EMPTY := $(shell echo $$(($(BARLEN) - $(FILLED))) ))
 
-	@printf "\r\033[35m[%s%s] %3s%%\033[0m  \033[90m(%s)\033[0m" \
-		$$(printf '#%.0s' $$(seq 1 $(FILLED))) \
-		$$(printf '.%.0s' $$(seq 1 $(EMPTY))) \
-		"$(PROG)" "$<"
+	ft_printf("  ____               _                   \n");
+	ft_printf(" / ___|   ___       | |   ___    _ __    __ _ \n");
+	ft_printf(" \\___ \\  / _ \\      | |  / _ \\  | '_ \\  / _` |\n");
+	ft_printf("  ___) | | (_) |     | | | (_) | | | | | | (_| |\n");
+	ft_printf(" |____/   \\___/      |_|  \\___/  |_| |_|  \\__, |\n");
+	ft_printf("                                          |___/ \n");
+	ft_printf("\n");
 
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -63,11 +67,13 @@ clean:
 	$(RM) $(OBJ)
 	$(MAKE) -C $(DIRMLX) clean --no-print-directory > /dev/null
 	$(MAKE) -C $(DIRPRINTF) clean --no-print-directory > /dev/null
+	$(MAKE) -C $(DIRLIBFT) clean --no-print-directory > /dev/null
 
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) -C $(DIRMLX) clean --no-print-directory > /dev/null
 	$(MAKE) -C $(DIRPRINTF) clean --no-print-directory > /dev/null
+	$(MAKE) -C $(DIRLIBFT) clean --no-print-directory > /dev/null
 
 re: fclean all
 
