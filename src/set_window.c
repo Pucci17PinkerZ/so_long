@@ -17,18 +17,28 @@ int	load_sprite(t_game *game)
 	game->sprite.img_player = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
 			"assets/player1.xpm", &game->sprite.img_width,
 			&game->sprite.img_height);
+	if (game->sprite.img_player == NULL)
+		return (1);
 	game->sprite.img_wall = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
 			"assets/wall1.xpm", &game->sprite.img_width,
 			&game->sprite.img_height);
+	if (game->sprite.img_wall == NULL)
+		return (1);
 	game->sprite.img_floor = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
 			"assets/floor1.xpm", &game->sprite.img_width,
 			&game->sprite.img_height);
+	if (game->sprite.img_floor == NULL)
+		return (1);
 	game->sprite.img_coin = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
 			"assets/coin1.xpm", &game->sprite.img_width,
 			&game->sprite.img_height);
+	if (game->sprite.img_coin == NULL)
+		return (1);
 	game->sprite.img_exit = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
 			"assets/exit1.xpm", &game->sprite.img_width,
 			&game->sprite.img_height);
+	if (game->sprite.img_exit == NULL)
+		return (1);
 	return (0);
 }
 
@@ -98,7 +108,8 @@ int	mlx_windows_start(t_game *game)
 			game->mlx.win_height, "so_long");
 	if (!game->mlx.win_ptr)
 		return (perror("mlx_new_window"), 1);
-	load_sprite(game);
+	if (load_sprite(game))
+		return (perror("load_sprite"), free_img_ptr(game), 1);
 	put_img(game);
 	mlx_hookloop(game);
 	return (0);

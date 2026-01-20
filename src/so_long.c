@@ -30,6 +30,9 @@ int	main(int argc, char **argv)
 	if (mlx_windows_start(&game))
 	{
 		free_map(game.map.map, game.map.column);
+		mlx_destroy_window(game.mlx.mlx_ptr, game.mlx.win_ptr);
+		mlx_destroy_display(game.mlx.mlx_ptr);
+		free(game.mlx.mlx_ptr);
 		return (1);
 	}
 	return (0);
