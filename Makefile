@@ -1,4 +1,4 @@
-CC = gcc
+CC = cc
 NAME = so_long
 DIRGNL = gnl
 DIRSRC = src
